@@ -34,6 +34,7 @@ my $event = "nethserver-webtop5-update";
 event_actions($event, 
                      'initialize-default-databases' => '00',
                      'nethserver-webtop5-conf' => '20',
+                     'nethserver-webtop5-auth' => '30'
 );
 event_templates($event, 
                      '/etc/dovecot/dovecot.conf',
@@ -43,7 +44,6 @@ event_templates($event,
                      '/usr/share/tomcat/webapps/webtop/META-INF/data-sources.xml',
                      '/usr/share/webtop/sql/data/init-data-core.sql',
                      '/usr/share/webtop/sql/data/init-data-mail.sql',
-                     '/usr/share/webtop/sql/nethserver-domain-init.sql',
                      '/var/lib/tomcat/webapps/webtop/WEB-INF/classes/logback.xml',
                      '/etc/sysconfig/tomcat'
 );

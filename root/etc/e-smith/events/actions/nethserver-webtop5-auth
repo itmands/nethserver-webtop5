@@ -1,4 +1,4 @@
-{
+#!/usr/bin/perl
 
 use esmith::ConfigDB;
 use File::Temp;
@@ -11,7 +11,7 @@ $fh = File::Temp->new();
 my ($login,$pass,$uid,$gid) = getpwnam('postgres') or die "postgres not in passwd file";
 chown $uid, $gid, $fh->filename;
 my $domain = $db->get('DomainName')->prop('type');
-print $fh "DELETE FROM domains;\n";
+print $fh "DELETE FROM core.domains WHERE domain_id = 'NethServer';\n";
 
 my $encoded = '';
 my $secret=$sssd->bindPassword();
@@ -37,6 +37,9 @@ my $user = $sssd->bindDN();
 my $uri = $sssd->ldapURI();
 my $port = "389";
 my $ssl = "null";
+my $first_name_field = 'givenName';
+my $last_name_field = 'sn';
+my $display_name_field = 'gecos';
 
 if ( $uri =~ /^ldaps/ ) {
     $ssl = "SSL";
@@ -46,12 +49,15 @@ if ( $sssd->startTls() ) {
     $ssl = "STARTTLS";
 }
 
+if ($sssd->isAD()) {
+    $display_name_field = 'cn';
+}
+
 $uri = "ldapneth://" . $sssd->host() . ":" . $port;
 
-my $dir_params = '{"loginDn":"ou=People,dc=directory,dc=nh","loginFilter":null,"userDn":"ou=People,dc=directory,dc=nh","userFilter":null,"userFirstnameField":"givenName","userLastnameField":"sn","userDisplayNameField":"gecos"}';
-
-my $order = 1;
+my $dir_params = '{"loginDn":"' . $sssd->userDN() . '","loginFilter":null,"userDn":"' . $sssd->userDN() . '","userFilter":null,"userFirstnameField":"' . $first_name_field . '","userLastnameField":"' . $last_name_field . '","userDisplayNameField":"' . $display_name_field . '"}';
 
 
-$OUT .= "\@INSERT INTO \"core\".\"domains\" (\"domain_id\", \"internet_name\", \"enabled\", \"description\", \"user_auto_creation\", \"dir_uri\", \"dir_admin\", \"dir_password\", \"dir_connection_security\", \"dir_case_sensitive\", \"dir_password_policy\", \"dir_parameters\") VALUES ('NethServer', '$domain', 't', 'NethServer', 't', '$uri', '$user', '$encoded', NULL, 'f', 'f', '$dir_params');\n";
-}
+print $fh "INSERT INTO \"core\".\"domains\" (\"domain_id\", \"internet_name\", \"enabled\", \"description\", \"user_auto_creation\", \"dir_uri\", \"dir_admin\", \"dir_password\", \"dir_connection_security\", \"dir_case_sensitive\", \"dir_password_policy\", \"dir_parameters\") VALUES ('NethServer', '$domain', 't', 'NethServer', 't', '$uri', '$user', '$encoded', NULL, 'f', 'f', '$dir_params');\n";
+
+system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");
