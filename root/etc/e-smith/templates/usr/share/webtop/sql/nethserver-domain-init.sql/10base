@@ -1,0 +1,57 @@
+{
+
+use esmith::ConfigDB;
+use File::Temp;
+use NethServer::SSSD;
+my $sssd = new NethServer::SSSD();
+
+my $db = esmith::ConfigDB->open_ro() or die "Could not open config db";
+
+$fh = File::Temp->new();
+my ($login,$pass,$uid,$gid) = getpwnam('postgres') or die "postgres not in passwd file";
+chown $uid, $gid, $fh->filename;
+my $domain = $db->get('DomainName')->prop('type');
+print $fh "DELETE FROM domains;\n";
+
+my $encoded = '';
+my $secret=$sssd->bindPassword();
+
+# Some obsucre perl magic, thanks to Davidep
+pipe RH, WH;
+open(OLDIN, "<&STDIN");
+open(STDIN, "<&RH");
+if(open(PIPE, "-|")) {
+    close(RH);
+    print WH $secret;
+    close(WH);
+    $encoded = <PIPE>;
+    chomp($encoded);
+} else {
+    exec("java -classpath /usr/share/webtop/ WebtopPassEncode");
+}
+close(PIPE);
+close(RH);
+open(STDIN, "<&OLDIN");
+
+my $user = $sssd->bindDN();
+my $uri = $sssd->ldapURI();
+my $port = "389";
+my $ssl = "null";
+
+if ( $uri =~ /^ldaps/ ) {
+    $ssl = "SSL";
+    $port = "636";
+}
+if ( $sssd->startTls() ) {
+    $ssl = "STARTTLS";
+}
+
+$uri = "ldapneth://" . $sssd->host() . ":" . $port;
+
+my $dir_params = '{"loginDn":"ou=People,dc=directory,dc=nh","loginFilter":null,"userDn":"ou=People,dc=directory,dc=nh","userFilter":null,"userFirstnameField":"givenName","userLastnameField":"sn","userDisplayNameField":"gecos"}';
+
+my $order = 1;
+
+
+$OUT .= "\@INSERT INTO \"core\".\"domains\" (\"domain_id\", \"internet_name\", \"enabled\", \"description\", \"user_auto_creation\", \"dir_uri\", \"dir_admin\", \"dir_password\", \"dir_connection_security\", \"dir_case_sensitive\", \"dir_password_policy\", \"dir_parameters\") VALUES ('NethServer', '$domain', 't', 'NethServer', 't', '$uri', '$user', '$encoded', NULL, 'f', 'f', '$dir_params');\n";
+}

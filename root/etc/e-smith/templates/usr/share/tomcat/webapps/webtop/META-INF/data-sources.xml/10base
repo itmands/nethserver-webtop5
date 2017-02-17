@@ -1,0 +1,18 @@
+{
+    use NethServer::Password;
+    our $password = NethServer::Password::store('webtop5');
+    '';
+}<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <service id="com.sonicle.webtop.core">
+                <dataSource name="default"
+                        dataSourceClassName="org.postgresql.ds.PGSimpleDataSource"
+                        serverName="localhost"
+                        username="sonicle"
+                        password="{{$password}}" 
+                        databaseName="webtop5"
+                >
+                        <property name="maximumPoolSize" value="10" />
+                </dataSource>
+        </service>
+</configuration>

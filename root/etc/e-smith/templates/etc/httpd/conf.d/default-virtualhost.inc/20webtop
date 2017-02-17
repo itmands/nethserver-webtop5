@@ -1,0 +1,6 @@
+#
+# 20webtop
+#
+RewriteEngine on
+RewriteRule ^/webtop(/.*)?$ https://%\{SERVER_NAME\}/webtop$1 [L,R=301]
+

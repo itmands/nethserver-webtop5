@@ -1,0 +1,22 @@
+-- ----------------------------
+-- Records of settings
+-- ----------------------------
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'devices.sync.shell.uri', 'sh://localhost');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'dropbox.appkey', '');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'dropbox.appsecret', '');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'googledrive.clientid', '');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'googledrive.clientsecret', '');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'otp.enabled', 'true');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'php.path', '/usr/share/webtop/bin/');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'smtp.host', 'localhost');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'smtp.port', '587');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'syslog.enabled', 'false');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'zpush.path', '/usr/share/webtop/z-push');
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'home.path', '/var/lib/nethserver/webtop');
+{
+    use NethServer::Password;
+    our $password = NethServer::Password::store('vmail');
+    '';
+}
+INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'nethtop.vmail.secret', '{{$password}}');
+

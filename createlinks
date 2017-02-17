@@ -1,0 +1,82 @@
+#!/usr/bin/perl
+
+#
+# Copyright (C) 2013 Nethesis S.r.l.
+# http://www.nethesis.it - support@nethesis.it
+# 
+# This script is part of NethServer.
+# 
+# NethServer is free software: you can webtoptribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+# 
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+use strict;
+use esmith::Build::CreateLinks  qw(:all);
+
+safe_symlink("/usr/bin/sudo", "root/usr/share/webtop/bin/php");
+
+#--------------------------------------------------
+# actions for nethserver-webtop5-update event
+#--------------------------------------------------
+
+my $event = "nethserver-webtop5-update";
+
+event_actions($event, 
+                     'initialize-default-databases' => '00',
+                     'nethserver-webtop5-conf' => '20',
+);
+event_templates($event, 
+                     '/etc/dovecot/dovecot.conf',
+                     '/usr/share/webtop/z-push/config.php',
+                     '/etc/httpd/conf.d/webtop.conf',
+                     '/etc/httpd/conf.d/default-virtualhost.inc',
+                     '/usr/share/tomcat/webapps/webtop/META-INF/data-sources.xml',
+                     '/usr/share/webtop/sql/data/init-data-core.sql',
+                     '/usr/share/webtop/sql/data/init-data-mail.sql',
+                     '/usr/share/webtop/sql/nethserver-domain-init.sql',
+                     '/var/lib/tomcat/webapps/webtop/WEB-INF/classes/logback.xml',
+                     '/etc/sysconfig/tomcat'
+);
+event_services($event, 
+                     'tomcat' => 'restart',
+                     'dovecot' => 'restart',
+                     'httpd' => 'reload',
+);
+
+
+#--------------------------------------------------
+# actions for pre-backup-data event
+#--------------------------------------------------
+
+$event = 'pre-backup-data';
+
+event_actions($event, 'nethserver-webtop5-backup' => 50);
+
+#--------------------------------------------------
+# actions for post-restore-data event
+#--------------------------------------------------
+
+$event = 'post-restore-data';
+
+event_actions($event, 'nethserver-webtop5-restore' => 50);
+
+event_services($event, 'tomcat' => 'restart');
+
+#--------------------------------------------------
+# actions for user-delete-event
+#--------------------------------------------------
+
+$event = 'user-delete';
+
+event_actions($event, 'nethserver-webtop5-delete' => 70);
+

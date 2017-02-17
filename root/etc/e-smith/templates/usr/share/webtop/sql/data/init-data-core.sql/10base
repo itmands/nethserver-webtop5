@@ -1,0 +1,64 @@
+-- ----------------------------
+-- Records of activities
+-- ----------------------------
+INSERT INTO "core"."activities" VALUES ('1', '*', '*', NULL, 'Permesso', 'f', NULL);
+INSERT INTO "core"."activities" VALUES ('2', '*', '*', NULL, 'Ferie', 'f', NULL);
+INSERT INTO "core"."activities" VALUES ('3', '*', '*', NULL, 'Malattia', 'f', NULL);
+
+-- ----------------------------
+-- Records of file_types
+-- ----------------------------
+INSERT INTO "core"."file_types" VALUES ('7z', 'archive', '');
+INSERT INTO "core"."file_types" VALUES ('aiff', 'audio', '');
+INSERT INTO "core"."file_types" VALUES ('asf', 'video', '');
+INSERT INTO "core"."file_types" VALUES ('au', 'audio', '');
+INSERT INTO "core"."file_types" VALUES ('avi', 'video', '');
+INSERT INTO "core"."file_types" VALUES ('bin', 'file', '');
+INSERT INTO "core"."file_types" VALUES ('bmp', 'image', '');
+INSERT INTO "core"."file_types" VALUES ('cab', 'archive', '');
+INSERT INTO "core"."file_types" VALUES ('css', 'text', '');
+INSERT INTO "core"."file_types" VALUES ('csv', 'text', '');
+INSERT INTO "core"."file_types" VALUES ('divx', 'video', '');
+INSERT INTO "core"."file_types" VALUES ('doc', 'document', 'word');
+INSERT INTO "core"."file_types" VALUES ('docx', 'document', 'word');
+INSERT INTO "core"."file_types" VALUES ('eml', 'message', '');
+INSERT INTO "core"."file_types" VALUES ('exe', 'application', '');
+INSERT INTO "core"."file_types" VALUES ('gif', 'image', '');
+INSERT INTO "core"."file_types" VALUES ('gz', 'archive', '');
+INSERT INTO "core"."file_types" VALUES ('htm', 'text', 'html');
+INSERT INTO "core"."file_types" VALUES ('html', 'text', 'html');
+INSERT INTO "core"."file_types" VALUES ('ics', 'calendar', '');
+INSERT INTO "core"."file_types" VALUES ('ical', 'calendar', '');
+INSERT INTO "core"."file_types" VALUES ('icalendar', 'calendar', '');
+INSERT INTO "core"."file_types" VALUES ('jpeg', 'image', '');
+INSERT INTO "core"."file_types" VALUES ('jpg', 'image', '');
+INSERT INTO "core"."file_types" VALUES ('js', 'script', '');
+INSERT INTO "core"."file_types" VALUES ('mkv', 'video', '');
+INSERT INTO "core"."file_types" VALUES ('mov', 'video', '');
+INSERT INTO "core"."file_types" VALUES ('mp3', 'audio', '');
+INSERT INTO "core"."file_types" VALUES ('mp4', 'video', '');
+INSERT INTO "core"."file_types" VALUES ('mpeg', 'video', '');
+INSERT INTO "core"."file_types" VALUES ('ogg', 'audio', '');
+INSERT INTO "core"."file_types" VALUES ('pdf', 'document', 'pdf');
+INSERT INTO "core"."file_types" VALUES ('png', 'image', '');
+INSERT INTO "core"."file_types" VALUES ('py', 'script', '');
+INSERT INTO "core"."file_types" VALUES ('rar', 'archive', '');
+INSERT INTO "core"."file_types" VALUES ('rtf', 'text', '');
+INSERT INTO "core"."file_types" VALUES ('svf', 'image', '');
+INSERT INTO "core"."file_types" VALUES ('tar', 'archive', '');
+INSERT INTO "core"."file_types" VALUES ('tiff', 'image', '');
+INSERT INTO "core"."file_types" VALUES ('txt', 'text', '');
+INSERT INTO "core"."file_types" VALUES ('waw', 'audio', '');
+INSERT INTO "core"."file_types" VALUES ('wma', 'audio', '');
+INSERT INTO "core"."file_types" VALUES ('wmv', 'video', '');
+INSERT INTO "core"."file_types" VALUES ('xls', 'document', 'excel');
+INSERT INTO "core"."file_types" VALUES ('xlsx', 'document', 'excel');
+INSERT INTO "core"."file_types" VALUES ('xml', 'text', '');
+INSERT INTO "core"."file_types" VALUES ('z', 'archive', '');
+INSERT INTO "core"."file_types" VALUES ('zip', 'archive', '');
+
+-- ----------------------------
+-- Records of media_types
+-- ----------------------------
+INSERT INTO "core"."media_types" VALUES ('eml', 'message/rfc822');
+
