@@ -13,10 +13,10 @@ my $domain = $cdb->get_value('DomainName');
 my $host = $cdb->get_value('SystemName');
 my $FQDN = $host.".".$domain;
 
-my $dbh = DBI->connect('dbi:Pg:dbname=webtop5','sonicle',NethServer::Password::store('webtop'),{AutoCommit=>1,RaiseError=>1,PrintError=>0});
-my $pass = $dbh->selectrow_array("SELECT password from users where login='admin' and iddomain!='NethServer'"); # return first field of first row
+my $dbh = DBI->connect('dbi:Pg:dbname=webtop5','sonicle',NethServer::Password::store('webtop5'),{AutoCommit=>1,RaiseError=>1,PrintError=>0});
+my $pass = $dbh->selectrow_array("SELECT password from core.local_vault  where user_id='admin'"); # return first field of first row
 
-if ($pass eq  'admin') {
+if ($pass eq  '0DPiKuNIrrVmD8IUCuw1hQxNqZc=' || $pass eq 'admin') { # default pass is SHA1 for admin
     my %res = (
         "text" => __('Please access WebTop to change password for the admin user. Default password is: "admin"'),
         "icon" => "warning"
