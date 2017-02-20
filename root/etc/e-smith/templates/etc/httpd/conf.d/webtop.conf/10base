@@ -2,16 +2,10 @@
 # 10base -- WebTop configuration
 #
 
-<Location /webtop>
-    Require ssl {
-        my $ports = $tomcat{'TCPPorts'} || '8080';
-        my @ports = split(/,/,$ports);
-        $WebTopPort = $ports[0];
-        $OUT = '';
-    }
-    ProxyPass http://127.0.0.1:{$WebTopPort}/webtop
-    ProxyPassReverse http://127.0.0.1:{$WebTopPort}/webtop
-</Location>
+ProxyPass /webtop/push ws://127.0.0.1:8080/webtop/push
+ProxyPassReverse /webtop/push ws://127.0.0.1:8080/webtop/push
+ProxyPass /webtop http://127.0.0.1:8080/webtop
+ProxyPassReverse /webtop http://127.0.0.1:8080/webtop
 
 # mod_rewrite configuration was moved to httpd/vhost-default template (#5088)
 
