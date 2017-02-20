@@ -45,6 +45,7 @@ event_templates($event,
                      '/usr/share/webtop/sql/data/init-data-core.sql',
                      '/usr/share/webtop/sql/data/init-data-mail.sql',
                      '/var/lib/tomcat/webapps/webtop/WEB-INF/classes/logback.xml',
+                     '/usr/share/webtop/z-push/backend/imap/config.php',
                      '/etc/sysconfig/tomcat'
 );
 event_services($event, 
