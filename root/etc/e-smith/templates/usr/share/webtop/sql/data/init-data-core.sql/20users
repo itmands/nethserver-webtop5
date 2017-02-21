@@ -6,7 +6,7 @@ INSERT INTO "core"."local_vault" VALUES ('*', 'admin', 'PLAIN', 'admin');
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO "core"."users" VALUES ('*', 'admin', 'U', 't', '991f72dc-2b96-4340-b88f-53506b160519', 'Administrator', 'K2U4CN57AEQ73QB5');
+INSERT INTO "core"."users"  ("domain_id", "user_id", "type", "enabled", "user_uid", "display_name") VALUES ('*', 'admin', 'U', 't', '991f72dc-2b96-4340-b88f-53506b160519', 'Administrator');
 
 -- ----------------------------
 -- Records of users_info
