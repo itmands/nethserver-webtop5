@@ -73,11 +73,3 @@ event_actions($event, 'nethserver-webtop5-restore' => 50);
 
 event_services($event, 'tomcat' => 'restart');
 
-#--------------------------------------------------
-# actions for user-delete-event
-#--------------------------------------------------
-
-$event = 'user-delete';
-
-event_actions($event, 'nethserver-webtop5-delete' => 70);
-
