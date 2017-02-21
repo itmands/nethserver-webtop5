@@ -36,17 +36,17 @@ Troubleshooting
 
 In case of errors, see following logs:
 
-* Tomcat: :file:`/var/log/tomcat/catalina.out`
+* Tomcat: ``journalctl -u tomcat@webtop``
 * Active Sync: :file:`/var/log/z-push/z-push-error.log`
 
 To inspect z-push status use: ::
 
     php /usr/share/webtop/z-push/z-push-admin.php
 
-Tomcat
-======
+Tomcat instance
+===============
 
-WebTop enforces some Java options for Tomcat.
+WebTop uses its own Tomcat instance running on port 58080.
 
 See content of ``/etc/e-smith/templates/etc/sysconfig/tomcat/90webtop``.
 

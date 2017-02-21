@@ -8,10 +8,11 @@ Source0: %{name}-%{version}.tar.gz
 Source3: WebtopPassEncode.java
 BuildArch: noarch
 
-Requires: nethserver-mail-server, nethserver-postgresql, nethserver-tomcat, nethserver-httpd
+Requires: nethserver-mail-server, nethserver-postgresql, nethserver-httpd
 Requires: php-process, php-pgsql, php-imap, php-ldap, php-mbstring
 Requires: perl-libintl, perl-DBD-Pg
 Requires: webtop5-core, webtop5-zpush
+Requires: tomcat
 
 BuildRequires: perl, java-1.7.0-openjdk-devel
 BuildRequires: nethserver-devtools 
@@ -30,6 +31,7 @@ mkdir -p root/var/lib/nethserver/webtop/domains/NethServer/images
 mkdir -p root/var/lib/nethserver/webtop/domains/NethServer/temp
 mkdir -p root/var/lib/nethserver/webtop/domains/NethServer/models
 
+mkdir -p root/var/lib/tomcats/webtop/{logs,temp,webapps,work}
 mkdir -p root/var/log/webtop
 mkdir -p root/var/lib/nethserver/webtop/backup
 
@@ -51,6 +53,10 @@ rm -rf %{buildroot}
   --dir /var/lib/nethserver/webtop/domains/NethServer/images 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer/temp 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer/models 'attr(-, tomcat, tomcat)' \
+  --dir /var/lib/tomcats/webtop/logs 'attr(-, tomcat, tomcat)' \
+  --dir /var/lib/tomcats/webtop/temp 'attr(-, tomcat, tomcat)' \
+  --dir /var/lib/tomcats/webtop/webapps 'attr(-, tomcat, tomcat)' \
+  --dir /var/lib/tomcats/webtop/work 'attr(-, tomcat, tomcat)' \
   --dir /var/log/webtop 'attr(-, tomcat, tomcat)' \
  > %{name}-%{version}-filelist
 
