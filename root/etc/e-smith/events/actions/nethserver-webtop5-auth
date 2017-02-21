@@ -10,7 +10,6 @@ my $db = esmith::ConfigDB->open_ro() or die "Could not open config db";
 $fh = File::Temp->new();
 my ($login,$pass,$uid,$gid) = getpwnam('postgres') or die "postgres not in passwd file";
 chown $uid, $gid, $fh->filename;
-my $domain = $db->get('DomainName')->prop('type');
 print $fh "DELETE FROM core.domains WHERE domain_id = 'NethServer';\n";
 
 my $encoded = '';
@@ -33,6 +32,7 @@ close(PIPE);
 close(RH);
 open(STDIN, "<&OLDIN");
 
+my $domain = $db->get('DomainName')->prop('type');
 my $user = $sssd->bindDN();
 my $uri = $sssd->ldapURI();
 my $port = "389";
@@ -57,7 +57,12 @@ $uri = "ldapneth://" . $sssd->host() . ":" . $port;
 
 my $dir_params = '{"loginDn":"' . $sssd->userDN() . '","loginFilter":null,"userDn":"' . $sssd->userDN() . '","userFilter":null,"userFirstnameField":"' . $first_name_field . '","userLastnameField":"' . $last_name_field . '","userDisplayNameField":"' . $display_name_field . '"}';
 
-
 print $fh "INSERT INTO \"core\".\"domains\" (\"domain_id\", \"internet_name\", \"enabled\", \"description\", \"user_auto_creation\", \"dir_uri\", \"dir_admin\", \"dir_password\", \"dir_connection_security\", \"dir_case_sensitive\", \"dir_password_policy\", \"dir_parameters\") VALUES ('NethServer', '$domain', 't', 'NethServer', 't', '$uri', '$user', '$encoded', NULL, 'f', 'f', '$dir_params');\n";
+
+# Set also public url
+my $public_url = $db->get_prop('webtop','PublicUrl') || 'http://'.$db->get('SystemName')->prop('type').'.'.$domain.'/webtop';
+
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'public.url';\n";
+print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'public.url', '$public_url');\n";
 
 system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");
