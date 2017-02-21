@@ -21,11 +21,14 @@ Available properties:
 
 * ``PublicUrl``: public URL used to publish resources for the cloud. If not set, default is ``http://<FQDN>/webtop``
 * ``ActiveSync``: if set to ``enabled``, it enables /Microsoft-Server-ActiveSync url.  Default is ``enabled``
+* ``MinMemory`` and ``MaxMemory``: minimun and maximum memory of Tomcat instance. Values are expressed in MB.
 
 Example: ::
 
   webtop=configuration
       ActiveSync=enabled
+      MaxMemory=1024
+      MinMemory=512
       PublicUrl=
 
 
@@ -48,12 +51,6 @@ Tomcat instance
 
 WebTop uses its own Tomcat instance running on port 58080.
 
-See content of ``/etc/e-smith/templates/etc/sysconfig/tomcat/90webtop``.
+The instance is launched with some special Java options,
+see content of ``/etc/sysconfig/tomcat/tomcat@webtop``.
 
-Known problems
-==============
-
-When PostgreSQL is restarted, WebTop can loss the database connection.
-If a blank page is displayed, restart Tomcat with the following command: ::
-
-    systemctl restart tomcat
