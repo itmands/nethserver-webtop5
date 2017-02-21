@@ -2,12 +2,10 @@
 # 10base -- WebTop configuration
 #
 
-ProxyPass /webtop/push ws://127.0.0.1:8080/webtop/push
-ProxyPassReverse /webtop/push ws://127.0.0.1:8080/webtop/push
-ProxyPass /webtop http://127.0.0.1:8080/webtop
-ProxyPassReverse /webtop http://127.0.0.1:8080/webtop
-
-# mod_rewrite configuration was moved to httpd/vhost-default template (#5088)
+ProxyPass /webtop/push ws://127.0.0.1:58080/webtop/push
+ProxyPassReverse /webtop/push ws://127.0.0.1:58080/webtop/push
+ProxyPass /webtop http://127.0.0.1:58080/webtop
+ProxyPassReverse /webtop http://127.0.0.1:58080/webtop
 
 # webtop ActiveSync is {$webtop{'ActiveSync'}}
 {

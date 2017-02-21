@@ -53,6 +53,7 @@ rm -rf %{buildroot}
   --dir /var/lib/nethserver/webtop/domains/NethServer/images 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer/temp 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer/models 'attr(-, tomcat, tomcat)' \
+  --dir /var/lib/tomcats/webtop/conf 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/tomcats/webtop/logs 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/tomcats/webtop/temp 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/tomcats/webtop/webapps 'attr(-, tomcat, tomcat)' \
