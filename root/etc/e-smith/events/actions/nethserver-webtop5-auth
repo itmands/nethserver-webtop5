@@ -53,7 +53,7 @@ if ($sssd->isAD()) {
     $prefix = 'ad://';
     $dir_params =  {
         loginDn => $sssd->userDN(),
-        loginFilter => undef,
+        loginFilter => '&(objectCategory=person)(objectClass=user)',
         userIdField => 'sAMAccountName',
         userDn => $sssd->userDN(),
         userFilter => undef,
@@ -62,7 +62,7 @@ if ($sssd->isAD()) {
         userDisplayNameField => 'displayName'
     };
 } else {
-    $prefix = 'ldap://';
+    $prefix = 'ldapneth://';
     $dir_params =  {  
         loginDn => $sssd->userDN(),
         loginFilter => undef,
