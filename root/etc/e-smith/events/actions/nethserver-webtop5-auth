@@ -3,6 +3,7 @@
 use esmith::ConfigDB;
 use File::Temp;
 use NethServer::SSSD;
+use JSON;
 my $sssd = new NethServer::SSSD();
 
 my $db = esmith::ConfigDB->open_ro() or die "Could not open config db";
@@ -37,27 +38,48 @@ my $user = $sssd->bindDN();
 my $uri = $sssd->ldapURI();
 my $port = "389";
 my $ssl = "null";
-my $first_name_field = 'givenName';
-my $last_name_field = 'sn';
-my $display_name_field = 'gecos';
+my $dir_params;
+my $prefix = '';
 
 if ( $uri =~ /^ldaps/ ) {
-    $ssl = "SSL";
+    $ssl = "'SSL'";
     $port = "636";
 }
 if ( $sssd->startTls() ) {
-    $ssl = "STARTTLS";
+    $ssl = "'STARTTLS'";
 }
 
 if ($sssd->isAD()) {
-    $display_name_field = 'cn';
+    $prefix = 'ad://';
+    $dir_params =  {
+        loginDn => $sssd->userDN(),
+        loginFilter => undef,
+        userIdField => 'sAMAccountName',
+        userDn => $sssd->userDN(),
+        userFilter => undef,
+        userFirstnameField => 'givenName',
+        userLastnameField => 'sn',
+        userDisplayNameField => 'displayName'
+    };
+} else {
+    $prefix = 'ldap://';
+    $dir_params =  {  
+        loginDn => $sssd->userDN(),
+        loginFilter => undef,
+        userIdField => 'uid',
+        userDn => $sssd->userDN(),
+        userFilter => undef,
+        userFirstnameField => 'givenName',
+        userLastnameField => 'sn',
+        userDisplayNameField => 'gecos'
+    };
 }
 
-$uri = "ldapneth://" . $sssd->host() . ":" . $port;
+$uri = $prefix . $sssd->host() . ":" . $port;
 
-my $dir_params = '{"loginDn":"' . $sssd->userDN() . '","loginFilter":null,"userDn":"' . $sssd->userDN() . '","userFilter":null,"userFirstnameField":"' . $first_name_field . '","userLastnameField":"' . $last_name_field . '","userDisplayNameField":"' . $display_name_field . '"}';
+my $query = "INSERT INTO \"core\".\"domains\" (\"domain_id\", \"internet_name\", \"enabled\", \"description\", \"user_auto_creation\", \"dir_uri\", \"dir_admin\", \"dir_password\", \"dir_connection_security\", \"dir_case_sensitive\", \"dir_password_policy\", \"dir_parameters\") VALUES ('NethServer', '$domain', 't', 'NethServer', 't', '$uri', '$user', '$encoded', $ssl, 'f', 'f', '". encode_json($dir_params)."');\n";
 
-print $fh "INSERT INTO \"core\".\"domains\" (\"domain_id\", \"internet_name\", \"enabled\", \"description\", \"user_auto_creation\", \"dir_uri\", \"dir_admin\", \"dir_password\", \"dir_connection_security\", \"dir_case_sensitive\", \"dir_password_policy\", \"dir_parameters\") VALUES ('NethServer', '$domain', 't', 'NethServer', 't', '$uri', '$user', '$encoded', NULL, 'f', 'f', '$dir_params');\n";
+print $fh $query;
 
 # Set also public url
 my $public_url = $db->get_prop('webtop','PublicUrl') || 'http://'.$db->get('SystemName')->prop('type').'.'.$domain.'/webtop';
