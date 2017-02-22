@@ -18,7 +18,7 @@
                 </encoder>
         </appender>
         <appender name="wt-rollingfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-                <file>${LOGS_HOME}/webtop.log</file>
+                <file>$\{LOGS_HOME\}/webtop.log</file>
                 <encoder>
                         <pattern>%date\{yyyy-MM-dd HH:mm:ss\} [%-5level] %logger\{36\} - %replace(%msg)\{'\s+$',''\}%n</pattern>
                 </encoder>
