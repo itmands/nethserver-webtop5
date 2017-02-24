@@ -51,13 +51,12 @@ if ( $sssd->startTls() ) {
 
 if ($sssd->isAD()) {
     $prefix = 'ldapneth://';
-    my $user_dn = "cn=Users,".$sssd->userDN(); # HACK: webtop doesn't support bind with scope "subtree"
     $dir_params =  {
-        loginDn => $user_dn,
+        loginDn => $sssd->userDN(),
         loginFilter => '&(objectCategory=person)(objectClass=user)',
         userIdField => 'sAMAccountName',
-        userDn => $user_dn,
-        userFilter => '&(objectClass=person)(objectClass=user)',
+        userDn => $sssd->userDN(),
+        userFilter => '(&(objectClass=user)(objectCategory=person)(!(isCriticalSystemObject=TRUE)))',
         userFirstnameField => 'givenName',
         userLastnameField => 'sn',
         userDisplayNameField => 'displayName'
