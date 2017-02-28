@@ -9,7 +9,7 @@ Source3: WebtopPassEncode.java
 BuildArch: noarch
 
 Requires: nethserver-mail-server, nethserver-postgresql, nethserver-httpd
-Requires: php-process, php-pgsql, php-imap, php-ldap, php-mbstring
+Requires: php-process, php-pgsql, php-imap, php-ldap, php-mbstring, php-mcrypt
 Requires: perl-libintl, perl-DBD-Pg
 Requires: webtop5-core, webtop5-zpush
 Requires: tomcat, java-1.7.0-openjdk
