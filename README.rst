@@ -77,5 +77,5 @@ Tomcat instance
 WebTop uses its own Tomcat instance running on port ``58080``.
 
 The instance is launched with some special Java options,
-see content of ``/etc/sysconfig/tomcat/tomcat@webtop``.
+see content of ``/etc/sysconfig/tomcat@webtop``.
 
