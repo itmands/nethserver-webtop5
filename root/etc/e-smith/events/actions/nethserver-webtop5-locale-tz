@@ -4,10 +4,7 @@ use esmith::ConfigDB;
 use File::Temp;
 
 my $db = esmith::ConfigDB->open_ro() or die "Could not open config db";
-
-$fh = File::Temp->new();
-my ($login,$pass,$uid,$gid) = getpwnam('postgres') or die "postgres user not found";
-chown $uid, $gid, $fh->filename;
+my $event = shift;
 
 my %locales = (
     'it_IT' => {
@@ -27,6 +24,17 @@ my %locales = (
         TIME_FORMAT_LONG => 'h:mm:ss a'
     },
 );
+
+if ( ! $event ) {
+    foreach my $key ( sort(keys(%locales)) ) {
+        print "$key\n";
+    }
+    exit 0;
+}
+
+$fh = File::Temp->new();
+my ($login,$pass,$uid,$gid) = getpwnam('postgres') or die "postgres user not found";
+chown $uid, $gid, $fh->filename;
 
 my $tz = $db->get_prop('webtop','DefaultTimezone') || 'Etc/UTC';
 my $locale = $db->get_prop('webtop','DefaultLocale') || 'en_US';
