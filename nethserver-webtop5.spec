@@ -54,6 +54,7 @@ rm -rf %{buildroot}
 %{genfilelist} %{buildroot} \
   --dir /var/lib/nethserver/webtop 'attr(755, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/backup 'attr(755, postgres, postgres)' \
+  --dir /var/lib/nethserver/webtop/domains 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer/images 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer/temp 'attr(-, tomcat, tomcat)' \
