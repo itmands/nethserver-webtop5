@@ -1,0 +1,66 @@
+#!/usr/bin/perl
+
+use esmith::ConfigDB;
+use File::Temp;
+
+my $db = esmith::ConfigDB->open_ro() or die "Could not open config db";
+my $event = shift;
+
+my %locales = (
+    'it_IT' => {
+        LANGUAGE => 'it_IT',
+        START_DAY => '1',
+        DATE_FORMAT_LONG => 'dd MMM yyyy',
+        DATE_FORMAT_SHORT => 'dd/MM/yyyy',
+        TIME_FORMAT_SHORT => 'HH:mm',
+        TIME_FORMAT_LONG => 'HH:mm:ss'
+    },
+    'en_US' => {
+        LANGUAGE => 'en_EN',
+        START_DAY => '0',
+        DATE_FORMAT_LONG => 'MMM dd, yyyy',
+        DATE_FORMAT_SHORT => 'MM/dd/yy',
+        TIME_FORMAT_SHORT => 'h:mm a',
+        TIME_FORMAT_LONG => 'h:mm:ss a'
+    },
+);
+
+if ( ! $event ) {
+    foreach my $key ( sort(keys(%locales)) ) {
+        print "$key\n";
+    }
+    exit 0;
+}
+
+$fh = File::Temp->new();
+my ($login,$pass,$uid,$gid) = getpwnam('postgres') or die "postgres user not found";
+chown $uid, $gid, $fh->filename;
+
+my $tz = $db->get_prop('webtop','DefaultTimezone') || 'Etc/UTC';
+my $locale = $db->get_prop('webtop','DefaultLocale') || 'en_US';
+
+if (! exists($locales{$locale}) ) { # fallback to en_US
+    $locale = 'en_US';
+}
+
+print $fh "
+DELETE FROM core.settings WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.i18n.languageTag';
+DELETE FROM core.settings WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.i18n.timezone';
+DELETE FROM core.settings WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.i18n.startDay';
+DELETE FROM core.settings WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.i18n.format.date.short';
+DELETE FROM core.settings WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.i18n.format.date.long';
+DELETE FROM core.settings WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.i18n.format.time.short';
+DELETE FROM core.settings WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.i18n.format.time.long';
+
+INSERT INTO core.settings (service_id, key, value) VALUES ('com.sonicle.webtop.core', 'default.i18n.languageTag', '" . $locales{$locale}{'LANGUAGE'} . "');
+INSERT INTO core.settings (service_id, key, value) VALUES ('com.sonicle.webtop.core', 'default.i18n.timezone', '" . $tz. "');
+INSERT INTO core.settings (service_id, key, value) VALUES ('com.sonicle.webtop.core', 'default.i18n.startDay', '" . $locales{$locale}{'START_DAY'} . "');
+INSERT INTO core.settings (service_id, key, value) VALUES ('com.sonicle.webtop.core', 'default.i18n.format.date.short', '" . $locales{$locale}{'DATE_FORMAT_SHORT'} . "');
+INSERT INTO core.settings (service_id, key, value) VALUES ('com.sonicle.webtop.core', 'default.i18n.format.date.long', '" . $locales{$locale}{'DATE_FORMAT_LONG'} . "');
+INSERT INTO core.settings (service_id, key, value) VALUES ('com.sonicle.webtop.core', 'default.i18n.format.time.short', '" . $locales{$locale}{'TIME_FORMAT_SHORT'} . "');
+INSERT INTO core.settings (service_id, key, value) VALUES ('com.sonicle.webtop.core', 'default.i18n.format.time.long', '" . $locales{$locale}{'TIME_FORMAT_LOMG'} . "');
+";
+
+$fh->flush();
+
+system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");

@@ -6,6 +6,7 @@ License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
 Source3: WebtopPassEncode.java
+Source4: ListTimeZones.java
 BuildArch: noarch
 
 Requires: nethserver-mail-server, nethserver-postgresql, nethserver-httpd
@@ -39,9 +40,13 @@ mkdir -p root/usr/share/webtop/bin/
 mkdir -p root/usr/share/webtop/updates/pre
 mkdir -p root/usr/share/webtop/updates/post/main
 
-cp %{SOURCE3} root/usr/share/webtop
-javac root/usr/share/webtop/WebtopPassEncode.java
-rm -f root/usr/share/webtop/WebtopPassEncode.java
+for source in %{SOURCE3} %{SOURCE4}
+do
+    cp $source root/usr/share/webtop
+    source=`basename $source`
+    javac root/usr/share/webtop/$source
+    rm -f root/usr/share/webtop/$source
+done
 
 %install
 rm -rf %{buildroot}
@@ -49,6 +54,7 @@ rm -rf %{buildroot}
 %{genfilelist} %{buildroot} \
   --dir /var/lib/nethserver/webtop 'attr(755, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/backup 'attr(755, postgres, postgres)' \
+  --dir /var/lib/nethserver/webtop/domains 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer/images 'attr(-, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/domains/NethServer/temp 'attr(-, tomcat, tomcat)' \
