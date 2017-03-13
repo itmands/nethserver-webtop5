@@ -13,12 +13,6 @@ INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'smtp.port', '5
 INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'syslog.enabled', 'false');
 INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'zpush.path', '/usr/share/webtop/z-push');
 INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'home.path', '/var/lib/nethserver/webtop');
-{
-    use NethServer::Password;
-    our $password = NethServer::Password::store('vmail');
-    '';
-}
-INSERT INTO "core"."settings" VALUES ('com.sonicle.webtop.core', 'nethtop.vmail.secret', '{{$password}}');
 
 -- -------------------------------------------------------------------
 -- Enable synchronization of calendars, contacts and task

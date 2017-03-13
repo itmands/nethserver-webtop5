@@ -3,6 +3,7 @@
 use esmith::ConfigDB;
 use File::Temp;
 use NethServer::SSSD;
+use NethServer::Password;
 use JSON;
 my $sssd = new NethServer::SSSD();
 
@@ -86,5 +87,11 @@ my $public_url = $db->get_prop('webtop','PublicUrl') || 'http://'.$db->get('Syst
 
 print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'public.url';\n";
 print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'public.url', '$public_url');\n";
+
+# Set vmail password
+my $vmail_password = NethServer::Password::store('vmail');
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'nethtop.vmail.secret';\n";
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.mail' and key = 'nethtop.vmail.secret';\n";
+print $fh "INSERT INTO \"core\".\"settings\" VALUES ('com.sonicle.webtop.mail', 'nethtop.vmail.secret', '$vmail_password');\n";
 
 system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");
