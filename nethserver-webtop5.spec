@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.0.1
+Version: 1.0.2
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -82,6 +82,9 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Tue Mar 14 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.2-1
+- WebTop5: can't access with master user NethServer/dev#5239
+
 * Thu Mar 09 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.1-1
 - WebTop 5: contacts don't work at all - Bug NethServer/dev#5237
 
