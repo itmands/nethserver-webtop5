@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.0.2
+Version: 1.0.3
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -82,6 +82,10 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Mon Mar 27 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.3-1
+- WebTop 5: upgrade to RC6 - NethServer/dev#5250
+- WebTop5: extended time format not set - Bug NethServer/dev#5254
+
 * Tue Mar 14 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.2-1
 - WebTop5: can't access with master user NethServer/dev#5239
 
