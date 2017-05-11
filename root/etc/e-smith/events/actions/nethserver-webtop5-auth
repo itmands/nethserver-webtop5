@@ -94,4 +94,7 @@ print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.web
 print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.mail' and key = 'nethtop.vmail.secret';\n";
 print $fh "INSERT INTO \"core\".\"settings\" VALUES ('com.sonicle.webtop.mail', 'nethtop.vmail.secret', '$vmail_password');\n";
 
+# Enable folder sorting
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.mail' and key = 'sort.folders';\n";
+print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.mail', 'sort.folders', 'true');\n";
 system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");
