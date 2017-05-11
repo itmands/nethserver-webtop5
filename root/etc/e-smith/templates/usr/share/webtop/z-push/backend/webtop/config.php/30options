@@ -1,0 +1,8 @@
+define('TIMEZONE', '{{ $php{'DateTimezone'} }}');
+define('LOGBASE_DIR','/var/log/z-push/');
+define('STATEBASE_DIR', LOGBASE_DIR );
+define('STATE_DIR', STATEBASE_DIR . 'state/');
+define('LOGFILEDIR', LOGBASE_DIR );
+define('LOGFILE', LOGFILEDIR . 'z-push.log');
+define('LOGERRORFILE', LOGFILEDIR . 'z-push-error.log');
+define('LOGLEVEL', {{$webtop{'ActiveSyncLog'} || 'LOGLEVEL_ERROR'}});
