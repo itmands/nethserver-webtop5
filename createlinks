@@ -34,7 +34,7 @@ my $event = "nethserver-webtop5-update";
 event_actions($event, 
                      'initialize-default-databases' => '00',
                      'nethserver-webtop5-conf' => '20',
-                     'nethserver-webtop5-auth' => '30',
+                     'nethserver-webtop5-conf-db' => '30',
                      'nethserver-webtop5-locale-tz' => '40'
 );
 event_templates($event, 
