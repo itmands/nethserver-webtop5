@@ -1,1 +1,11 @@
-define('ZPUSH_VERSION','2.3.4.1');
+{
+    my $file = '/usr/share/webtop/z-push/VERSION';
+    my $version = '';
+    open(my $fh, '<', $file) or return '';
+    {
+        local $/;
+        $version = <$fh>;
+    }
+    close($fh);
+    $OUT .= "define('ZPUSH_VERSION','$version');";
+}
