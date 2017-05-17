@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.0.3
+Version: 1.1.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -82,6 +82,10 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Wed May 17 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.0-1
+- WebTop 5: enable folder sorting - NethServer/dev#5275
+- Build RPM from source
+
 * Mon Mar 27 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.3-1
 - WebTop 5: upgrade to RC6 - NethServer/dev#5250
 - WebTop5: extended time format not set - Bug NethServer/dev#5254
