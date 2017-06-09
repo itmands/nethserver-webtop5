@@ -28,6 +28,5 @@ INSERT INTO "core"."roles_permissions" ("role_uid", "service_id", "key", "action
 
 INSERT INTO "core"."roles_permissions" ("role_uid", "service_id", "key", "action", "instance") VALUES ('0f4d4fa7-7f21-48c0-96c9-fc6d861cc8fe', 'com.sonicle.webtop.core', 'DEVICES_SYNC', 'ACCESS', '*');
 INSERT INTO "core"."roles_permissions" ("role_uid", "service_id", "key", "action", "instance") VALUES ('0f4d4fa7-7f21-48c0-96c9-fc6d861cc8fe', 'com.sonicle.webtop.core', 'USER_PROFILE_INFO', 'MANAGE', '*');
-INSERT INTO "core"."roles_permissions" ("role_uid", "service_id", "key", "action", "instance") VALUES ('0f4d4fa7-7f21-48c0-96c9-fc6d861cc8fe', 'com.sonicle.webtop.mail', 'ACCOUNT_SETTINGS', 'CHANGE', '*');
 INSERT INTO "core"."roles_permissions" ("role_uid", "service_id", "key", "action", "instance") VALUES ('0f4d4fa7-7f21-48c0-96c9-fc6d861cc8fe', 'com.sonicle.webtop.mail', 'MAILCARD_SETTINGS', 'CHANGE', '*');
 
