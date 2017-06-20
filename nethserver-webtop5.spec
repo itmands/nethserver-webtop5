@@ -52,6 +52,7 @@ done
 rm -rf %{buildroot}
 (cd root; find . -depth -print | cpio -dump %{buildroot})
 %{genfilelist} %{buildroot} \
+  --file /etc/sudoers.d/webtop 'attr(0440, root, root)' \
   --dir /var/lib/nethserver/webtop 'attr(755, tomcat, tomcat)' \
   --dir /var/lib/nethserver/webtop/backup 'attr(755, postgres, postgres)' \
   --dir /var/lib/nethserver/webtop/domains 'attr(-, tomcat, tomcat)' \
