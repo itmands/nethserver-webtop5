@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.1.0
+Version: 1.1.1
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -83,6 +83,11 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Thu Jun 22 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.1-1
+- WebTop 5.0.7 - NethServer/dev#5312
+- Implement log rotation with logrotate
+- Clear Tomcat cache dir on service restart
+
 * Wed May 17 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.0-1
 - WebTop 5: enable folder sorting - NethServer/dev#5275
 - Build RPM from source
