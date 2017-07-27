@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.1.1
+Version: 1.1.2
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Thu Jul 27 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.2-1
+- WebTop5: Outlook PST import - NethServer/dev#5244
+
 * Thu Jun 22 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.1-1
 - WebTop 5.0.7 - NethServer/dev#5312
 - Implement log rotation with logrotate
