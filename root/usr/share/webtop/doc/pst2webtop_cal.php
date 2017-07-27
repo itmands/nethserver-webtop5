@@ -409,7 +409,8 @@ class ICal
                     }
                 }
             }
-            $this->process_recurrences();
+            # HACK: disable recurrent events
+            # $this->process_recurrences();
             return $this->cal;
         }
     }
