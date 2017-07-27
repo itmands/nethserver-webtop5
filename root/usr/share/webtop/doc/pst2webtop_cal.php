@@ -66,8 +66,6 @@ if ($tzrow[0] != "")
 		unset($arrayEvent);
 
                 $subject =  $event['SUMMARY'];
-#                $dstart =  $ical->iCalDateToUnixTimestamp($event['DTSTART']);
-#                $dend =  $ical->iCalDateToUnixTimestamp($event['DTEND']);
 		$dstart = strtotime($event['DTSTART']);
 		$dend = strtotime($event['DTEND']);
 
@@ -83,13 +81,12 @@ if ($tzrow[0] != "")
                 $organizer =  $event['ORGANIZER'];
                 $attendee =  $event['ATTENDEE'];
 
-              # da gestire
                 $alldayevent="";
                 $busystatus="false";
                 $sensitivity = "false";
                 $reminder = "";
 
-### da qui corrisponde al backend calendar di zpush, dalla riga 535 a seguire
+            ## from here start zpush calendar backup, from line 535 onward
 
             $dateTimeZone = new DateTimeZone(date_default_timezone_get());
             $dateTime = new DateTime("now", $dateTimeZone);
@@ -158,7 +155,6 @@ if ($tzrow[0] != "")
             $id = getGlobalKey();
             $arrayEvent["event_id"] = $id;
             $arrayEvent["public_uid"] = uniqid();
-#TODO            $arrayEvent["organizer"] = $this->_emaillogin;
             $arrayEvent["read_only"] = false;
 	    echo "Importing $subject on Calendar $foldername ($user) ".$event['DTSTART']." $fromtime offset $timeOffset ....";
 	    if (!$dryrun) {
