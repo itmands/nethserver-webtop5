@@ -36,11 +36,21 @@ EOF
     su - postgres  -c "psql < $tmp_sql" >/dev/null
     rm -f $tmp_sql
 
-    # initialize db schema
-    for sql in `find /usr/share/webtop/sql/schema/ -name \*.sql`
+    # initialize db schema in the following order
+    # 1. core
+    # 2. config
+    # 3. calendar
+    # 4. contacts
+    # 5. mail
+    # 6. tasks
+    # 7. vfs
+    #
+    # init-public.sql is obsolete
+    # - prima di tutto esegui il core, poi il config (public non serve più), poi tutti gli altri (calendar,contacts,mail,tasks,vfs)
+    for sql in core config calendar contacts mail tasks vfs
     do
         echo "Loading: $sql ..."
-        su - postgres  -c "psql webtop5 < $sql" >/dev/null
+        su - postgres  -c "psql webtop5 < /usr/share/webtop/sql/schema/init-$sql.sql" >/dev/null
     done
 
     # initialize db data
