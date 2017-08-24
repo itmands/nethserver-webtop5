@@ -123,10 +123,10 @@ print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.web
 print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.mail', 'sieve.spamfilter.disabled', 'true');\n";
 
 # Configure Nextcloud, do not replace values if already exist
-print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.mail', 'nextcloud.default.host', 'localhost' 
-              WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE key = 'nextcloud.default.host' and service_id = 'com.sonicle.webtop.mail');\n";
-print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.mail', 'nextcloud.default.path', '/nextcloud/remote.php/webdav' 
-              WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE key = 'nextcloud.default.path' and service_id = 'com.sonicle.webtop.mail');\n";
+print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.vfs', 'nextcloud.default.host', 'localhost' 
+              WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE key = 'nextcloud.default.host' and service_id = 'com.sonicle.webtop.vfs');\n";
+print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.vfs', 'nextcloud.default.path', '/nextcloud/remote.php/webdav' 
+              WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE key = 'nextcloud.default.path' and service_id = 'com.sonicle.webtop.vfs');\n";
 
 
 # Execute SQL script
