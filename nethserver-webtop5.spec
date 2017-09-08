@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.1.3
+Version: 1.1.4
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -83,6 +83,11 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Fri Sep 08 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.4-1
+- WebTop 5.0.13 - NethServer/dev#5338
+- Disable iCal4j timezone update
+- Avoid automatic deploy for future releases
+
 * Mon Sep 04 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.3-1
 - WebTop 5.0.13 - NethServer/dev#5338
 
