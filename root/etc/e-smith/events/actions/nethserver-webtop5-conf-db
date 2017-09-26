@@ -45,7 +45,10 @@ if(open(PIPE, "-|")) {
     close(RH);
     print WH $secret;
     close(WH);
-    $encoded = <PIPE>;
+    {
+        local $/ = undef;
+        $encoded = <PIPE>;
+    }
     chomp($encoded);
 } else {
     exec("java -classpath /usr/share/webtop/ WebtopPassEncode");
