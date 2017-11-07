@@ -64,6 +64,7 @@ my $port = "389";
 my $ssl = "null";
 my $dir_params;
 my $prefix = '';
+my $spamFolder = $db->get_prop('dovecot','SpamFolder');
 
 if ( $uri =~ /^ldaps/ ) {
     $ssl = "'SSL'";
@@ -124,6 +125,10 @@ print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\"
 # Always disable built-in SPAM sieve filter
 print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.mail' and key = 'sieve.spamfilter.disabled';\n";
 print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.mail', 'sieve.spamfilter.disabled', 'true');\n";
+
+# Set spam folder name accordingly to Dovecot configuration
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.mail' and key = 'default.folder.spam';\n";
+print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.mail', 'default.folder.spam', '$spamFolder');\n";
 
 # Configure Nextcloud, do not replace values if already exist
 print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.vfs', 'nextcloud.default.host', 'localhost' 
