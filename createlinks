@@ -70,5 +70,16 @@ $event = 'post-restore-data';
 
 event_actions($event, 'nethserver-webtop5-restore' => 50);
 
-event_services($event, 'tomcat' => 'restart');
+event_services($event, 'tomcat@webtop' => 'restart');
+
+
+#--------------------------------------------------
+# actions for nethserver-mail-server-save event
+#--------------------------------------------------
+
+$event = 'nethserver-mail-server-save';
+
+event_actions($event, 'nethserver-webtop5-conf-db' => 50);
+
+event_services($event, 'tomcat@webtop' => 'restart');
 
