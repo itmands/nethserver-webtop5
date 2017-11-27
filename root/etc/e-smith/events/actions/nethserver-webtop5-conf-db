@@ -130,6 +130,10 @@ print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\"
 print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.mail' and key = 'default.folder.spam';\n";
 print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.mail', 'default.folder.spam', '$spamFolder');\n";
 
+# Delete sent messages from draft folders
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.mail' and key = 'default.folder.drafts.deletemsgonsend';\n";
+print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.mail', 'default.folder.drafts.deletemsgonsend', 'true');\n";
+
 # Configure Nextcloud, do not replace values if already exist
 print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.vfs', 'nextcloud.default.host', 'localhost' 
               WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE key = 'nextcloud.default.host' and service_id = 'com.sonicle.webtop.vfs');\n";
