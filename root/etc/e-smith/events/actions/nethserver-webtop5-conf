@@ -46,7 +46,6 @@ EOF
     # 7. vfs
     #
     # init-public.sql is obsolete
-    # - prima di tutto esegui il core, poi il config (public non serve più), poi tutti gli altri (calendar,contacts,mail,tasks,vfs)
     for sql in core config calendar contacts mail tasks vfs
     do
         echo "Loading: $sql ..."
@@ -54,7 +53,7 @@ EOF
     done
 
     # initialize db data
-    for dsql in `find /usr/share/webtop/sql/data/ -name \*.sql`
+    for dsql in `find /usr/share/webtop/sql/data/ -name \*.sql | sort`
     do
         echo "Loading: $dsql ..."
         su - postgres  -c "psql webtop5 < $dsql" >/dev/null
