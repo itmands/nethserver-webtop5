@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.1.6
+Version: 1.1.7
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Tue Jan 09 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.7-1
+- WebTop 5: installation fails on ext4 - NethServer/dev#5405
+
 * Wed Nov 29 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.6-1
 - WebTop 5.1.4 - NethServer/dev#5376
 
