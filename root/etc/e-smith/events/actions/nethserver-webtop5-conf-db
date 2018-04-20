@@ -140,6 +140,9 @@ print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'co
 print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.vfs', 'nextcloud.default.path', '/nextcloud/remote.php/webdav' 
               WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE key = 'nextcloud.default.path' and service_id = 'com.sonicle.webtop.vfs');\n";
 
+# Set ACL IMAP lowercase
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.mail' and key = 'imap.acl.lowercase';\n";
+print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.mail', 'imap.acl.lowercase', 'true');\n";
 
 # Execute SQL script
 system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");
