@@ -1,7 +1,5 @@
 /var/log/webtop/webtop.log {
     copytruncate
-    weekly
-    compress
     missingok
     create 0644 tomcat tomcat
 }
