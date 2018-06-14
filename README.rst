@@ -34,6 +34,7 @@ Available properties:
 * ``DefaultTimezone``: default timezone for WebTop users. To list available timezones: ``JAVA_HOME=/usr/share/webtop/ java ListTimeZones``
 * ``MinMemory`` and ``MaxMemory``: minimun and maximum memory of Tomcat instance. Values are expressed in MB.
 * ``PublicUrl``: public URL used to publish resources for the cloud. If not set, default is ``http://<FQDN>/webtop``
+* ``DavServerUrl``: Dav server URL for CalDAV and CardDAV clients configuration. If not set, default is ``http://<FQDN>/webtop-dav/server.php``
 
 Example: ::
 
