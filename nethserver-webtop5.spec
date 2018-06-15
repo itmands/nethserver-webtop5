@@ -5,7 +5,6 @@ Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
-Source3: WebtopPassEncode.java
 Source4: ListTimeZones.java
 BuildArch: noarch
 
@@ -41,7 +40,7 @@ mkdir -p root/usr/share/webtop/bin/
 mkdir -p root/usr/share/webtop/updates/pre
 mkdir -p root/usr/share/webtop/updates/post/main
 
-for source in %{SOURCE3} %{SOURCE4}
+for source in %{SOURCE4}
 do
     cp $source root/usr/share/webtop
     source=`basename $source`
