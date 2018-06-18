@@ -51,7 +51,7 @@ if(open(PIPE, "-|")) {
     }
     chomp($encoded);
 } else {
-    exec("java -classpath /usr/share/webtop/ WebtopPassEncode");
+    exec("openssl enc -des-ecb -a -K 70617373776f7264");
 }
 close(PIPE);
 close(RH);

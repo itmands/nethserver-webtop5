@@ -5,7 +5,6 @@ Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
-Source3: WebtopPassEncode.java
 Source4: ListTimeZones.java
 BuildArch: noarch
 
@@ -13,10 +12,10 @@ Requires: nethserver-mail-server, nethserver-postgresql, nethserver-httpd
 Requires: php-process, php-pgsql, php-imap, php-ldap, php-mbstring, php-mcrypt
 Requires: perl-libintl, perl-DBD-Pg
 Requires: webtop5 >= 1.2.2, webtop5-zpush, webtop5-webdav
-Requires: tomcat, java-1.7.0-openjdk
+Requires: tomcat, java-1.8.0-openjdk
 Requires: nethserver-rh-php56-php-fpm
 
-BuildRequires: perl, java-1.7.0-openjdk-devel
+BuildRequires: perl, java-1.8.0-openjdk-devel
 BuildRequires: nethserver-devtools 
 
 %description
@@ -41,7 +40,7 @@ mkdir -p root/usr/share/webtop/bin/
 mkdir -p root/usr/share/webtop/updates/pre
 mkdir -p root/usr/share/webtop/updates/post/main
 
-for source in %{SOURCE3} %{SOURCE4}
+for source in %{SOURCE4}
 do
     cp $source root/usr/share/webtop
     source=`basename $source`
