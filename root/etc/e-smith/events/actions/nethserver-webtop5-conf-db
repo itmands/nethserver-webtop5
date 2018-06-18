@@ -118,6 +118,20 @@ my $davserver_url = $db->get_prop('webtop','DavServerUrl') || 'http://'.$db->get
 print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'davserver.url';\n";
 print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'davserver.url', '$davserver_url');\n";
 
+# Set pbx provider
+my $pbx_provider = $db->get_prop('webtop','PbxProvider') || "";
+
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'pbx.provider';\n";
+print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'pbx.provider', '$pbx_provider');\n";
+
+if ($pbx_provider eq "nethvoice") {
+    # Set NethVoice base url for api calls
+    my $pbx_provider_nethvoice_webrest_url = $db->get_prop('webtop','PbxProviderNethvoiceWebrestUrl') || "";
+
+    print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'pbx.provider.nethvoice.webrest.url';\n";
+    print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'pbx.provider.nethvoice.webrest.url', '$pbx_provider_nethvoice_webrest_url');\n";
+}
+
 # Set vmail password
 my $vmail_password = NethServer::Password::store('vmail');
 print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'nethtop.vmail.secret';\n";
