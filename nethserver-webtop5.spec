@@ -11,7 +11,7 @@ BuildArch: noarch
 Requires: nethserver-mail-server, nethserver-postgresql, nethserver-httpd
 Requires: php-process, php-pgsql, php-imap, php-ldap, php-mbstring, php-mcrypt
 Requires: perl-libintl, perl-DBD-Pg
-Requires: webtop5 >= 1.2.3, webtop5-zpush, webtop5-webdav
+Requires: webtop5 >= 1.2.4, webtop5-zpush, webtop5-webdav
 Requires: tomcat, java-1.8.0-openjdk
 Requires: nethserver-rh-php56-php-fpm
 
