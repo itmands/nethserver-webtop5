@@ -8,6 +8,7 @@ It's composed by three parts:
 
 * Java web application running on Tomcat 7
 * PHP implementation of Active Sync protocol
+* PHP implementation of CardDAV and CalDAV protocol
 * PostgreSQL database
 
 Access to web application is forced in SSL mode.
@@ -18,6 +19,7 @@ WebTop 5 has been split in 4 different RPMs:
   WebTop release
 - webtop5-libs: derived from a WAR, it contains all third-party jars. This package will be seldom updated
 - webtop5-zpush: ActiveSync implementation for WebTop, it contains PHP code from z-push project (http://z-push.org/)
+- webtop5-webdav: CardDAV and CalDAV implementation for WebTop, it contains PHP code from sabre/dav project (http://sabre.io/dav/)
 - nethserver-webtop5: NethServer auto-configuration for WebTop
 
 Database
@@ -114,6 +116,10 @@ You should see an HTML output containing the string: ::
 
   GET not supported
 
+CardDAV and CalDAV
+------------------
+CardDAV and CalDAV are implemented using a PHP application called webtop-dav.
+All logs are inside ``/var/log/webtop-dav/`` directory.
 
 
 Tomcat instance
