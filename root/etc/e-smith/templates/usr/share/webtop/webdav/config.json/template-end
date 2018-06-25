@@ -1,7 +1,3 @@
-  "log": \{
-    "level": "ERROR",
-    "file": "/var/log/webtop-dav/dav-server.log"
-  \},
   "api": \{
     "baseUrl": "http://localhost:58080/webtop",
     "dav": \{
