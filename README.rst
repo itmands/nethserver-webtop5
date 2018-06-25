@@ -131,6 +131,11 @@ It is also possibile to enable webtop-dav debug using these commands: ::
 Instead of ``DEBUG`` you can use any constant supported by ``webtop-dav`` implementation.
 See ``/usr/share/webtop/webtop-dav/lib/webtop/Log.php``.
 
+To enable ``browser-plugin`` for directory indexes of the Dav server: ::
+
+  config setprop webtop Debug true
+  signal-event nethserver-webtop5-update
+
 Tomcat instance
 ===============
 
