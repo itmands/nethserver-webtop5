@@ -37,6 +37,7 @@ Available properties:
 * ``MinMemory`` and ``MaxMemory``: minimun and maximum memory of Tomcat instance. Values are expressed in MB.
 * ``PublicUrl``: public URL used to publish resources for the cloud. If not set, default is ``http://<FQDN>/webtop``
 * ``DavServerUrl``: Dav server URL for CalDAV and CardDAV clients configuration. If not set, default is ``http://<FQDN>/webtop-dav/server.php``
+* ``DavServerLog``: log level of webtop-dav implementation. As default webtop-dav will log only relevant errors.
 * ``PbxProvider``: PBX provider name
 * ``PbxProviderNethvoiceWebrestUrl``: NethVoice base url for API calls, used when ``PbxProvider`` is set to ``nethvoice``
 
@@ -122,6 +123,13 @@ CardDAV and CalDAV
 CardDAV and CalDAV are implemented using a PHP application called webtop-dav.
 All logs are inside ``/var/log/webtop-dav/`` directory.
 
+It is also possibile to enable webtop-dav debug using these commands: ::
+
+  config setprop webtop DavServerLog DEBUG
+  signal-event nethserver-webtop5-update
+
+Instead of ``DEBUG`` you can use any constant supported by ``webtop-dav`` implementation.
+See ``/usr/share/webtop/webtop-dav/lib/webtop/Log.php``.
 
 Tomcat instance
 ===============
