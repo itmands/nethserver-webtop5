@@ -1,0 +1,8 @@
+{
+    if (($webtop{'Debug'} || '') eq 'true') {
+        $OUT = '  "debug": true,';
+    } else {
+        $OUT = '  "debug": false,';
+    }
+
+}

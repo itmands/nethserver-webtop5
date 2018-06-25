@@ -1,0 +1,4 @@
+\{
+  "caldav": true,
+  "carddav": true,
+  "baseUri": "/webtop-dav/server.php",
