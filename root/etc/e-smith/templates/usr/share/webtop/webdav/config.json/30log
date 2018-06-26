@@ -1,0 +1,6 @@
+  "log": \{
+{
+    $OUT = '  "level": "' . ($webtop{'DavServerLog'} || 'ERROR') . '",'
+}
+    "file": "/var/log/webtop-dav/dav-server.log"
+  \},
