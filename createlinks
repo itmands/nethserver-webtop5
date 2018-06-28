@@ -36,7 +36,7 @@ event_actions($event,
                      'nethserver-webtop5-conf' => '20',
                      'nethserver-webtop5-conf-db' => '30',
                      'nethserver-webtop5-locale-tz' => '40',
-                     'nethserver-webtop5-logs-clean' => '50'
+                     'nethserver-webtop5-clean-logs' => '50'
 );
 event_templates($event, 
                      '/etc/dovecot/dovecot.conf',
