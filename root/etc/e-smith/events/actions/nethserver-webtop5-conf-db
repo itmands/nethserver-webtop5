@@ -106,6 +106,10 @@ my $query = "INSERT INTO \"core\".\"domains\" (\"domain_id\", \"internet_name\",
 
 print $fh $query;
 
+# Insert zip media type - HACK for JavaMail bug
+print $fh "DELETE FROM \"core\".\"media_types\" WHERE extension = 'zip' AND media_type = 'application/zip';\n";
+print $fh "INSERT INTO \"core\".\"media_types\" (\"extension\", \"media_type\") VALUES ('zip', 'application/zip');\n";
+
 # Set also public url
 my $public_url = $db->get_prop('webtop','PublicUrl') || 'http://'.$db->get('SystemName')->prop('type').'.'.$domain.'/webtop';
 
