@@ -113,7 +113,7 @@ print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.web
 print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'public.url', '$public_url');\n";
 
 # Set dav server url
-my $davserver_url = $db->get_prop('webtop','DavServerUrl') || 'http://'.$db->get('SystemName')->prop('type').'.'.$domain.'/webtop-dav/server.php';
+my $davserver_url = $db->get_prop('webtop','DavServerUrl') || 'https://'.$db->get('SystemName')->prop('type').'.'.$domain.'/webtop-dav/server.php';
 
 print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'davserver.url';\n";
 print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'davserver.url', '$davserver_url');\n";
