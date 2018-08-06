@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.4
+Version: 1.2.5
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Mon Aug 06 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.5-1
+- WebTop 5: can't authenticate to local AD - Bug NethServer/dev#5560
+
 * Tue Jul 17 2018 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.4-1
 - WebTop 5.2.3 - NethServer/dev#5516
 
