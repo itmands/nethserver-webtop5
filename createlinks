@@ -46,6 +46,7 @@ event_templates($event,
                      '/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/classes/logback.xml',
                      '/usr/share/webtop/z-push/backend/webtop/config.php',
                      '/usr/share/webtop/z-push/backend/webtop/imap_config.php',
+                     '/usr/share/webtop/webdav/config.json',
                      '/etc/sysconfig/tomcat@webtop'
 );
 event_services($event, 
