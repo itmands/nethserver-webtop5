@@ -41,6 +41,8 @@ Available properties:
 * ``PbxProvider``: PBX provider name
 * ``PbxProviderNethvoiceWebrestUrl``: NethVoice base url for API calls, used when ``PbxProvider`` is set to ``nethvoice``
 * ``DefaultToolBarIconsSize``: Default dimension of the toolbar icons, available values: ``small``, ``medium``, ``large``. Default is ``medium``
+* ``SmtpAuth``: if set to ``enabled``, it enables authentication for user sessions SMTP send. Default is ``disabled`
+* ``SmtpStarttls``: if set to ``enabled``, it enables STARTTLS SMTP send. Default is ``disabled`
 
 Example: ::
 
