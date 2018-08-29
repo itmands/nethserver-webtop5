@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.5
+Version: 1.2.6
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -83,6 +83,10 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Wed Aug 29 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.6-1
+- webtop5-zpush: Incorrect creation of calendar events and contacts. - Bug NethServer/dev#5570
+- suppress Java 8 warnings
+
 * Mon Aug 06 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.5-1
 - WebTop 5: can't authenticate to local AD - Bug NethServer/dev#5560
 
