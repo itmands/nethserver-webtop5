@@ -40,6 +40,7 @@ Available properties:
 * ``DavServerLog``: log level of webtop-dav implementation. As default webtop-dav will log only relevant errors.
 * ``PbxProvider``: PBX provider name
 * ``PbxProviderNethvoiceWebrestUrl``: NethVoice base url for API calls, used when ``PbxProvider`` is set to ``nethvoice``
+* ``DefaultToolBarIconsSize``: Default dimension of the toolbar icons, available values: ``small``, ``medium``, ``large``. Default is ``medium``
 
 Example: ::
 

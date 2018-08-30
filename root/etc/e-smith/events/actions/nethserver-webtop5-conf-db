@@ -172,5 +172,11 @@ print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\"
 print $fh "UPDATE calendar.events AS cevts SET href = cevts.public_uid || '.ics' FROM calendar.calendars AS ccals WHERE (cevts.calendar_id = ccals.calendar_id) AND (cevts.href IS NULL);\n";
 print $fh "UPDATE contacts.contacts AS ccnts SET href = ccnts.public_uid || '.vcf' FROM contacts.categories AS ccats WHERE (ccnts.category_id = ccats.category_id) AND (ccnts.href IS NULL);\n";
 
+# Set default size icons toolbar
+my $default_toolbar_icons_size = $db->get_prop('webtop','DefaultToolBarIconsSize') || "medium";
+
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.viewport.header.scale';\n";
+print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'default.viewport.header.scale', '$default_toolbar_icons_size');\n";
+
 # Execute SQL script
 system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");
