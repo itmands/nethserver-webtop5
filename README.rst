@@ -43,6 +43,10 @@ Available properties:
 * ``DefaultToolBarIconsSize``: Default dimension of the toolbar icons, available values: ``small``, ``medium``, ``large``. Default is ``medium``
 * ``SmtpAuth``: if set to ``enabled``, it enables authentication for user sessions SMTP send. Default is ``disabled``
 * ``SmtpStarttls``: if set to ``enabled``, it enables STARTTLS SMTP send. Default is ``disabled``
+* ``RemoteCalendarAutosync``: if set to ``enabled``, it enables remote calendars auto-sync functionality. The sincronization interval can be set by user on remote calendar creation. Default is ``enabled``
+* ``RemoteCalendarAutosyncOnlywhenonline``: if set to ``enabled`` the remote calendars is auto-sync only when calendar’s owner is online during the sincronization time. Default is ``disabled``
+* ``RemoteCategoryAutosync``: if set to ``enabled`` , it enables remote categories auto-sync functionality. The sincronization interval can be set by user on remote category creation. Default is ``enabled``
+* ``RemoteCategoryAutosyncOnlywhenonline``: if set to ``enabled`` the remote categoties is auto-sync only when category’s owner is online during the sincronization time. Default is ``disabled``
 
 Example: ::
 
