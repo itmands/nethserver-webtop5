@@ -178,5 +178,20 @@ my $default_toolbar_icons_size = $db->get_prop('webtop','DefaultToolBarIconsSize
 print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.viewport.header.scale';\n";
 print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'default.viewport.header.scale', '$default_toolbar_icons_size');\n";
 
+#set SMTP Auth (default false)
+my $smtp_auth = $db->get_prop('webtop','SmtpAuth') || "disabled";
+if ($smtp_auth eq "enabled") { $smtp_auth = "true"; } elsif ($smtp_auth eq "disabled") { $smtp_auth = "false"; }
+
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'smtp.auth';\n";
+print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'smtp.auth', '$smtp_auth');\n";
+
+
+#set SMTP STARTTLS (default false)
+my $smtp_starttls = $db->get_prop('webtop','SmtpStarttls') || "disabled";
+if ($smtp_auth eq "enabled") { $smtp_auth = "true"; } elsif ($smtp_auth eq "disabled") { $smtp_auth = "false"; }
+
+print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'smtp.starttls';\n";
+print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'smtp.starttls', '$smtp_auth');\n";
+
 # Execute SQL script
 system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");
