@@ -1,0 +1,7 @@
+#!/bin/bash
+
+curl -Ss -O https://www.freeutils.net/source/jcharset/jcharset-2.0-distribution.zip || exit 1
+
+unzip jcharset-2.0-distribution.zip || exit 1
+
+cp jcharset-2.0/lib/jcharset-2.0.jar . || exit 1

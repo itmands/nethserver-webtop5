@@ -6,6 +6,7 @@ License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
 Source4: ListTimeZones.java
+Source5: jcharset-2.0.jar
 BuildArch: noarch
 
 Requires: nethserver-mail-server, nethserver-postgresql, nethserver-httpd
@@ -22,7 +23,7 @@ BuildRequires: nethserver-devtools
 NethServer webtop configuration
 
 %prep
-%setup
+%setup -q
 
 %build
 %{makedocs}
@@ -47,6 +48,9 @@ do
     javac root/usr/share/webtop/$source
     rm -f root/usr/share/webtop/$source
 done
+
+mkdir -p root/usr/lib/jvm/jre/lib/ext
+cp %{SOURCE5} root/usr/lib/jvm/jre/lib/ext
 
 %install
 rm -rf %{buildroot}
