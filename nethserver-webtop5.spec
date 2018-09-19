@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.6
+Version: 1.2.7
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -87,6 +87,13 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Wed Sep 19 2018 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.7-1
+- WebTop 5.3.3 - NethServer/dev#5571
+- spec: include JCharset 2.0 jar in rpm
+- config: add remote calendar/categories autosync options
+- config: add smtp auth options
+- config: add toolbar icons size  option
+
 * Wed Aug 29 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.6-1
 - webtop5-zpush: Incorrect creation of calendar events and contacts. - Bug NethServer/dev#5570
 - suppress Java 8 warnings
