@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.7
+Version: 1.2.8
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -87,6 +87,10 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Fri Oct 12 2018 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.8-1
+- nethserver-webtop5: new release with minors fixes - NethServer/dev#5602
+- Package nethserver-X must subscribe nethserver-sssd-save - NethServer/dev#5600
+
 * Wed Sep 19 2018 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.7-1
 - WebTop 5.3.3 - NethServer/dev#5571
 - spec: include JCharset 2.0 jar in rpm
