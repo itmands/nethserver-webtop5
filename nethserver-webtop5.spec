@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.8
+Version: 1.2.9
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -87,6 +87,9 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Wed Oct 17 2018 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.9-1
+- WebTop 5.4.1 - NethServer/dev#5607
+
 * Fri Oct 12 2018 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.8-1
 - nethserver-webtop5: new release with minors fixes - NethServer/dev#5602
 - Package nethserver-X must subscribe nethserver-sssd-save - NethServer/dev#5600
