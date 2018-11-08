@@ -78,3 +78,7 @@ else
     done
 fi
 
+
+# Make sure old tomcat instance has been stopped
+systemctl stop tomcat@webtop 2>/dev/null
+config delete tomcat@webtop 2>/dev/null
