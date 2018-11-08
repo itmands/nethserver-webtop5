@@ -47,10 +47,10 @@ event_templates($event,
                      '/usr/share/webtop/z-push/backend/webtop/config.php',
                      '/usr/share/webtop/z-push/backend/webtop/imap_config.php',
                      '/usr/share/webtop/webdav/config.json',
-                     '/etc/sysconfig/tomcat@webtop'
+                     '/etc/sysconfig/tomcat8@webtop'
 );
 event_services($event, 
-                     'tomcat@webtop' => 'restart',
+                     'tomcat8@webtop' => 'restart',
                      'dovecot' => 'restart',
                      'httpd' => 'reload',
 );
@@ -72,7 +72,7 @@ $event = 'post-restore-data';
 
 event_actions($event, 'nethserver-webtop5-restore' => 50);
 
-event_services($event, 'tomcat@webtop' => 'restart');
+event_services($event, 'tomcat8@webtop' => 'restart');
 
 
 #--------------------------------------------------
@@ -83,7 +83,7 @@ $event = 'nethserver-mail-server-save';
 
 event_actions($event, 'nethserver-webtop5-conf-db' => 50);
 
-event_services($event, 'tomcat@webtop' => 'restart');
+event_services($event, 'tomcat8@webtop' => 'restart');
 
 #--------------------------------------------------
 # actions for nethserver-sssd-save event
@@ -93,4 +93,4 @@ $event = 'nethserver-sssd-save';
 
 event_actions($event, 'nethserver-webtop5-conf-db' => 50);
 
-event_services($event, 'tomcat@webtop' => 'restart');
+event_services($event, 'tomcat8@webtop' => 'restart');
