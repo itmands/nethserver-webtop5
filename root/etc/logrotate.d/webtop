@@ -5,7 +5,6 @@
 }
 
 /var/lib/tomcats/webtop/logs/manager.log
-/var/lib/tomcats/webtop/logs/localhost_access_log.txt
 /var/lib/tomcats/webtop/logs/localhost.log
 /var/lib/tomcats/webtop/logs/host-manager.log
 /var/lib/tomcats/webtop/logs/catalina.log {
