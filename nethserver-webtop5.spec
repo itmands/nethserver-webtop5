@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.13
+Version: 1.2.14
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -87,6 +87,10 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Mon Dec 03 2018 Davide Principi <davide.principi@nethesis.it> - 1.2.14-1
+- WebTop: use Apache Tomcat 8.5 - NethServer/dev#5638
+- nethserver-webtop5:  data backup is not restored correctly - Bug NethServer/dev#5650
+
 * Thu Nov 22 2018 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.13-1
 - WebTop 5.4.5 - NethServer/dev#5651
 
