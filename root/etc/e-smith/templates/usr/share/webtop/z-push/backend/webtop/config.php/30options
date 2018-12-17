@@ -1,4 +1,4 @@
-define('TIMEZONE', '{{ $php{'DateTimezone'} }}');
+define('TIMEZONE', '{{ $webtop{'DefaultTimezone'} || 'UTC' }}');
 define('LOGBASE_DIR','/var/log/z-push/');
 define('STATEBASE_DIR', LOGBASE_DIR );
 define('STATE_DIR', STATEBASE_DIR . 'state/');
