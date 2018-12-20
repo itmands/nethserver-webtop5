@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.15
+Version: 1.2.16
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -87,6 +87,9 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Thu Dec 20 2018 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.16-1
+- Revert "z-push: use DefaultTimezone prop for set time zone"
+
 * Mon Dec 17 2018 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.15-1
 -  WebTop 5.5.0 - NethServer/dev#5666
 
