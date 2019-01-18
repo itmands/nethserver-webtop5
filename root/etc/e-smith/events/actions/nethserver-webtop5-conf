@@ -80,5 +80,5 @@ fi
 
 
 # Make sure old tomcat instance has been stopped
-systemctl stop tomcat@webtop 2>/dev/null
-config delete tomcat@webtop 2>/dev/null
+systemctl stop tomcat@webtop 2>/dev/null || exit 0
+config delete tomcat@webtop 2>/dev/null || exit 0
