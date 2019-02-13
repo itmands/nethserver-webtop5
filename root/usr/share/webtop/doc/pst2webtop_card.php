@@ -173,14 +173,13 @@ if (!$dryrun) {
                 if (isset($NOTE)) {
                     $arrayContact["notes"] = truncateString($NOTE, 2000);
                 }
-                $arrayContact["public_uid"] = truncateString($NOTE, 2000);
-
 
                 $id = getGlobalKey($webtop_db,'SEQ_CONTACTS');
                 $arrayContact["contact_id"] = $id;
                 if (!$dryrun)
 			$arrayContact["category_id"] = getCategoryId($foldername,$user,$iddomain);
                 $arrayContact["public_uid"] = uniqid();
+		$arrayContact["href"]=$arrayContact["public_uid"].".vcf";
                 $arrayContact["is_list"] = false;
 		
                 echo "Importing $FirstN $SeconN $ORG di $user su $foldername.....";
