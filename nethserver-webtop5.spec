@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.17
+Version: 1.2.18
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -87,6 +87,9 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Fri Feb 15 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.18-1
+- WebTop: incorrect PST contacts/calendars import - NethServer/dev#5709
+
 * Fri Jan 18 2019 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.17-1
  - nethserver-webtop5-conf: fix action always failed
 
