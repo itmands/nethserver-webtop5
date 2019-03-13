@@ -23,8 +23,6 @@
 use strict;
 use esmith::Build::CreateLinks  qw(:all);
 
-safe_symlink("/usr/bin/sudo", "root/usr/share/webtop/bin/php");
-
 #--------------------------------------------------
 # actions for nethserver-webtop5-update event
 #--------------------------------------------------
