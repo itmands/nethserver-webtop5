@@ -80,8 +80,8 @@ fi
 
 
 # Make sure old tomcat instance has been stopped
-systemctl stop tomcat@webtop 2>/dev/null || exit 0
-config delete tomcat@webtop 2>/dev/null || exit 0
+systemctl stop tomcat@webtop 2>/dev/null || true
+config delete tomcat@webtop 2>/dev/null || true
 
 
 # NethServer/dev#5731 - Fix existing installations where core.file_types table is empty
