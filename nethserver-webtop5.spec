@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.18
+Version: 1.2.19
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -87,6 +87,9 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Tue Mar 26 2019 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.19-1
+- WebTop: no icon on mail attachments - Bug NethServer/dev#5731
+
 * Fri Feb 15 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.18-1
 - WebTop: incorrect PST contacts/calendars import - NethServer/dev#5709
 
