@@ -56,3 +56,8 @@ INSERT INTO "core"."settings" ("service_id", "key", "value") VALUES ('com.sonicl
 -- Disable statistic fields in event window
 -- -------------------------------------------
 INSERT INTO "core"."settings" ("service_id", "key", "value") VALUES ('com.sonicle.webtop.calendar', 'event.statistic.fields.visible', 'false');
+
+-- -----------------------------
+-- Set Mail grid view to compact
+-- -----------------------------
+INSERT INTO "core"."settings" ("service_id", "key", "value") VALUES ('com.sonicle.webtop.mail', 'default.viewmode', 'compact');
