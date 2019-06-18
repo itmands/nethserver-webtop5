@@ -61,3 +61,8 @@ INSERT INTO "core"."settings" ("service_id", "key", "value") VALUES ('com.sonicl
 -- Set Mail grid view to compact
 -- -----------------------------
 INSERT INTO "core"."settings" ("service_id", "key", "value") VALUES ('com.sonicle.webtop.mail', 'default.viewmode', 'compact');
+
+-- ---------------------------
+-- Enable Mail compact toolbar
+-- ---------------------------
+INSERT INTO "core"."settings" ("service_id", "key", "value") VALUES ('com.sonicle.webtop.mail', 'toolbar.compact', 'true');
