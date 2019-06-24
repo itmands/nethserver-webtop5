@@ -111,7 +111,7 @@ if (!$dryrun) {
                 	$arrayContact["searchfield"] = $arrayContact["searchfield"] . $arrayContact["lastname"];
             	}
             	if (isset($FirstN) and isset($SeconN)) {
-                	$arrayContact["display_name"] = truncateString($FirstN + ' ' + $SeconN, 255);
+                	$arrayContact["display_name"] = truncateString($FirstN . ' ' . $SeconN, 255);
             	}
             	if (isset($TITLE)) {
                 	$arrayContact["title"] = truncateString($TITLE, 30);
