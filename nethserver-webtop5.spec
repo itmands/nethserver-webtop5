@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.2.19
+Version: 1.3.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -87,6 +87,14 @@ rm -rf %{buildroot}
 %doc README.rst
 
 %changelog
+* Tue Jun 25 2019 Matteo Valentini <matteo.valentini@nethesis.it> - 1.3.0-1
+- WebTop 5.7.1 - NethServer/dev#5770
+  - config: set default contacts ordering by last name
+  - templates: enable optimized frontend javascripts
+  - pst2webtop_card.php: add display_name field
+  - config: enable compact toolbar as default
+  - configs: Set mail grid view to compact as default
+
 * Tue Mar 26 2019 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.19-1
 - WebTop: no icon on mail attachments - Bug NethServer/dev#5731
 
