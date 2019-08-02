@@ -33,7 +33,7 @@ mkdir -p root/var/lib/nethserver/webtop/domains/NethServer/images
 mkdir -p root/var/lib/nethserver/webtop/domains/NethServer/temp
 mkdir -p root/var/lib/nethserver/webtop/domains/NethServer/models
 
-mkdir -p root/var/lib/tomcats/webtop/{logs,temp,webapps,work}
+mkdir -p root/var/lib/tomcats/webtop/{lib,logs,temp,webapps,work}
 mkdir -p root/var/log/webtop
 mkdir -p root/var/lib/nethserver/webtop/backup
 
@@ -49,8 +49,7 @@ do
     rm -f root/usr/share/webtop/$source
 done
 
-mkdir -p root/usr/lib/jvm/jre/lib/ext
-cp %{SOURCE5} root/usr/lib/jvm/jre/lib/ext
+cp %{SOURCE5} root/var/lib/tomcats/webtop/lib
 
 %install
 rm -rf %{buildroot}
