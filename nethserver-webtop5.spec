@@ -28,6 +28,7 @@ NethServer webtop configuration
 %build
 %{makedocs}
 perl createlinks
+sed -i 's/_RELEASE_/%{version}/' %{name}.json
 mkdir -p root/var/lib/nethserver/webtop/domains/NethServer
 mkdir -p root/var/lib/nethserver/webtop/domains/NethServer/images
 mkdir -p root/var/lib/nethserver/webtop/domains/NethServer/temp
