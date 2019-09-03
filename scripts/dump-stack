@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#
+# Create a dump of webtop tomcat instance
+#
+
+NOW=$(date +%s)
+OUT_LOG_FILE="/tmp/webtop-$NOW".log
+OUT_DUMP_FILE="/tmp/webtop-$NOW".dump
+
+
+which jstack &>/dev/null
+# Install required dependcies
+if [ $? -gt 0 ]; then
+    yum install java-1.8.0-openjdk-devel -y
+fi
+
+if [ $? -gt 0 ]; then
+    echo "Can't install unzip"
+    exit 1
+fi
+
+
+echo "Dumping status ..."
+tomcat_pid=$(systemctl -p MainPID show tomcat8@webtop | cut -d'=' -f 2)
+jstack -F $tomcat_pid > $OUT_LOG_FILE
+echo >> $OUT_LOG_FILE
+jmap -F -histo $tomcat_pid >> $OUT_LOG_FILE
+echo "Dumping heap ..."
+jmap -F -dump:live,format=b,file=$OUT_DUMP_FILE $tomcat_pid
+gzip $OUT_DUMP_FILE
+
+echo "Status log: $OUT_LOG_FILE"
+echo "Heap dump: $OUT_DUMP_FILE.gz"
