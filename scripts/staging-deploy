@@ -43,7 +43,7 @@ fi
 echo "$(date +'%h %d %H:%M:%S') Starting deploy"
 
 echo "Downloading staging war"
-#wget "$STAGING_URL" -O $STAGING_FILE
+wget "$STAGING_URL" -O $STAGING_FILE
 true
 if [ $? -gt 0 ]; then
     echo "Can't download staging file: $STAGING_URL"
