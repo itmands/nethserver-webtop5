@@ -30,6 +30,8 @@ Configuration is saved in ``webtop`` key inside ``configuration`` database.
 Available properties:
 
 * ``ActiveSyncLog``: log level of z-push implementation. As default z-push will log only relevant errors.
+* ``ActiveSyncLegactIds``: can be ``enabled`` or ``disabled``. If set to ``enabled``, use backward compatibile z-push ids to avoid device full rsync on update.
+  See "Active Sync" section for more info
 * ``Debug``: if set to ``true``, enable debug for the web application. Default is ``false``
 * ``DefaultLocale``: default locale for WebTop users. To list available locales execute: ``/etc/e-smith/events/actions/nethserver-webtop5-locale-tz``
 * ``DefaultTimezone``: default timezone for WebTop users. To list available timezones: ``JAVA_HOME=/usr/share/webtop/ java ListTimeZones``
@@ -123,6 +125,22 @@ You can test Active Sync using this command (please set user, password and serve
 You should see an HTML output containing the string: ::
 
   GET not supported
+
+Legacy ids
+^^^^^^^^^^
+
+When the ``ActiveSyncLegacyIds`` is set to ``enabled``, the z-push implementation is affected by the following limitations:
+
+- a user can't have more than one calendar with the same name
+- resources with very long names (eg. calendars) can cause synchronization problems
+
+If such problems occur, please switch to new id implementation: ::
+
+  config setprop webtop ActiveSyncLegacyIds disabled
+  rm -rf /var/log/z-push/state/*
+  signal-event nethserver-webtop5-update
+
+Please note that after switching to new implementation, **all devices will require a full synchronization**.
 
 CardDAV and CalDAV
 ------------------

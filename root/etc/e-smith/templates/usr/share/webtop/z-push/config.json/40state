@@ -1,0 +1,4 @@
+  "state": \{
+      "dir": "/var/log/z-push/state",
+      "useLegacyFolderIds": { (($webtop{'ActiveSyncLegacyIds'} || 'enabled') eq 'enabled') ? "true" : "false" }
+  \},
