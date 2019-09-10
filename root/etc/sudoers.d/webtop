@@ -1,4 +1,4 @@
 Defaults:tomcat !requiretty
 
-tomcat ALL=NOPASSWD: /usr/share/webtop/z-push/z-push-admin.php
+tomcat ALL= (apache) NOPASSWD: /usr/share/webtop/bin/z-push-admin-wapper
 

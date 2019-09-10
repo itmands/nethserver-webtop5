@@ -23,8 +23,6 @@
 use strict;
 use esmith::Build::CreateLinks  qw(:all);
 
-safe_symlink("/usr/bin/sudo", "root/usr/share/webtop/bin/php");
-
 #--------------------------------------------------
 # actions for nethserver-webtop5-update event
 #--------------------------------------------------
@@ -44,8 +42,7 @@ event_templates($event,
                      '/etc/httpd/conf.d/default-virtualhost.inc',
                      '/var/lib/tomcats/webtop/webapps/webtop/META-INF/data-sources.xml',
                      '/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/classes/logback.xml',
-                     '/usr/share/webtop/z-push/backend/webtop/config.php',
-                     '/usr/share/webtop/z-push/backend/webtop/imap_config.php',
+                     '/usr/share/webtop/z-push/config.json',
                      '/usr/share/webtop/webdav/config.json',
                      '/etc/sysconfig/tomcat8@webtop'
 );
@@ -53,7 +50,7 @@ event_services($event,
                      'tomcat8@webtop' => 'restart',
                      'dovecot' => 'restart',
                      'httpd' => 'reload',
-                     'rh-php71-php-fpm' => 'restart',
+                     'rh-php72-php-fpm' => 'restart',
 );
 
 

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo -u apache /usr/share/webtop/bin/z-push-admin-wapper "$@"
