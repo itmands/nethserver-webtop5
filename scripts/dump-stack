@@ -29,6 +29,9 @@ jmap -F -histo $tomcat_pid >> $OUT_LOG_FILE
 echo "Dumping heap ..."
 jmap -F -dump:live,format=b,file=$OUT_DUMP_FILE $tomcat_pid
 gzip $OUT_DUMP_FILE
+echo "Dumping pids ..."
+echo >> $OUT_LOG_FILE
+ps -T u -p $tomcat_pid >> $OUT_LOG_FILE
 
 echo "Status log: $OUT_LOG_FILE"
 echo "Heap dump: $OUT_DUMP_FILE.gz"
