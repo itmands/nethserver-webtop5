@@ -26,13 +26,12 @@ eval $COOKIE
 quoted=$(python -c "import urllib, sys; print urllib.quote_plus(sys.argv[1])" $BASE_URL)
 
 # Execute the login and retrieve a JSON contained in the body
-data=$(curl -k -sL $BASE_URL"/login" -H "Cookie: JSESSIONID=$JSESSIONID" --data "location=$quoted&wtusername=$USER&wtpassword=$PASSWORD&wtdomain=NethServer" | grep 'WTS = {"session' | cut -d'=' -f2)
-name=$(echo $data| jq -cr '.servicesVars[0].userDisplayName' 2>/dev/null)
+data=$(curl -k -sL $BASE_URL"/login" -H "Cookie: JSESSIONID=$JSESSIONID" --data "location=$quoted&wtusername=$USER&wtpassword=$PASSWORD&wtdomain=NethServer")
 
 # Extract the sessionid: if it's empty, login has failed
-sessionid=$(echo $data| jq -cr '.sessionId' 2>/dev/null)
+sessionid=$(echo $data| grep -Po '\{"sessionId":"\K[^"]*')
 
-if [ -z $sessionid ]; then
+if [ -z "$sessionid" ]; then
     echo "[ERROR] USER: $USER URL: $BASE_URL"
     exit 1
 else
