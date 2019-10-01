@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.3.0
+Version: 1.4.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -97,6 +97,13 @@ cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 %doc README.rst
 
 %changelog
+* Tue Oct 01 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.0-1
+- WebTop: new ActiveSync implementation - NethServer/dev#5732
+- Cockpit legacy apps implementation - NethServer/dev#5782
+- WebTop 5.7.3 - NethServer/dev#5770
+- Cockpit. List correct application version - Nethserver/dev#5819
+- Sudoers based authorizations for Cockpit UI - NethServer/dev#5805
+
 * Tue Jun 25 2019 Matteo Valentini <matteo.valentini@nethesis.it> - 1.3.0-1
 - WebTop 5.7.1 - NethServer/dev#5770
   - config: set default contacts ordering by last name
