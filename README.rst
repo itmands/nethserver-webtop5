@@ -95,10 +95,6 @@ Tomcat instance is managed by systemd unit called ``tomcat@webtop``.
 All logs are saved inside ``/var/lib/tomcats/webtop/logs/`` directory.
 The logs are rotated daily and deletes after 2 days.
 
-Tomcat output can also be inspected using the following command: ::
-
-  journalctl -u tomcat@webtop
-
 Active Sync
 -----------
 
