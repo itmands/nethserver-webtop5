@@ -5,6 +5,7 @@ Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
+Source1: %{name}-cockpit.tar.gz
 Source4: ListTimeZones.java
 Source5: jcharset-2.0.jar
 BuildArch: noarch
@@ -59,8 +60,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/cockpit/%{name}/
 mkdir -p %{buildroot}/usr/share/cockpit/nethserver/applications/
 mkdir -p %{buildroot}/usr/libexec/nethserver/api/%{name}/
-cp -a manifest.json %{buildroot}/usr/share/cockpit/%{name}/
-cp -a logo.png %{buildroot}/usr/share/cockpit/%{name}/
+tar xvf %{SOURCE1} -C %{buildroot}/usr/share/cockpit/%{name}/
 cp -a %{name}.json %{buildroot}/usr/share/cockpit/nethserver/applications/
 cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 

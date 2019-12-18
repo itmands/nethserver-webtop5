@@ -5,3 +5,13 @@ curl -Ss -O https://www.freeutils.net/source/jcharset/jcharset-2.0-distribution.
 unzip jcharset-2.0-distribution.zip || exit 1
 
 cp jcharset-2.0/lib/jcharset-2.0.jar . || exit 1
+
+# tar directory
+set -e
+
+pushd ui
+npm install
+npm run build
+popd
+
+tar -C ui/dist -c -z -f nethserver-webtop5-cockpit.tar.gz .
