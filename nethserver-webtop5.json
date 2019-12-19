@@ -14,9 +14,9 @@
     "url": "https://github.com/NethServer/dev/issues"
   },
   "author": {
-    "name": "Edoardo Spadoni",
+    "name": "Edoardo Spadoni, Federico Ballarini",
     "url": "https://github.com/NethServer/nethserver-webtop5",
-    "email": "edoardo.spadoni@nethesis.it"
+    "email": "edoardo.spadoni@nethesis.it, fed.ballarini@gmail.com"
   },
   "infoapi": {
     "path": "nethserver-webtop5/read"
