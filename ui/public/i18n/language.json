@@ -16,7 +16,17 @@
         "filter_label": "Regexp filter"
     },
     "dashboard":{
-        "title": "Hotspot"
+        "title": "Dashboard",
+        "open_app": "Open app",
+        "active_users": "Active users",
+        "error_reading_webtop5_configuration": "Error while reading WebTop 5 configuration",
+        "webtop_modules_version": "WebTop modules version",
+        "webtop_core": "Core",
+        "webtop_mail": "Mail",
+        "webtop_calendar": "Calendar",
+        "webtop_contacts": "Contacts",
+        "webtop_vfs": "VFS Cloud",
+        "webtop_tasks": "Tasks"        
     },
     "docs": {
     },
