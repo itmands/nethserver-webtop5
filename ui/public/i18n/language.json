@@ -50,7 +50,10 @@
         "webtop_calendar": "Calendar",
         "webtop_contacts": "Contacts",
         "webtop_vfs": "VFS Cloud",
-        "webtop_tasks": "Tasks"        
+        "webtop_tasks": "Tasks",
+        "webtop_admin_password": "WebTop admin password",
+        "warning": "Warning",
+        "change_default_password": "The default password for the admin user is 'Nethesis,1234'. Please change it as soon as possible from WebTop application to avoid security issues!"
     },
     "docs": {
         "DefaultLocale": "Default locale for WebTop users.",

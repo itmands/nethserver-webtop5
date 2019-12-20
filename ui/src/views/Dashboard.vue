@@ -46,6 +46,16 @@
           </form>
         </div>
       </div>
+      <div v-show="configuration.admin_pass_warn" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h3 class="space">{{ $t('dashboard.webtop_admin_password') }}</h3>
+          <div class="alert alert-warning">
+            <span class="pficon pficon-warning-triangle-o"></span>
+            <strong>{{$t('dashboard.warning')}}:</strong>
+            {{$t('dashboard.change_default_password')}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -67,7 +77,8 @@ export default {
       configuration: {
         active_users: 0,
         version: {},
-        public_url: null
+        public_url: null,
+        admin_pass_warn: false
       }
     };
   },

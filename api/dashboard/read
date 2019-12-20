@@ -51,7 +51,21 @@ if ($cmd eq 'configuration') {
   my $users = $query->execute();
   
   $ret->{'configuration'}{'active_users'} = $users;
-
+  
+  # read pass and check if is changed
+  $query = $webtopdb->prepare("select password_type,password from core.local_vault where user_id = 'admin';");
+  $query->execute();
+  @row = $query->fetchrow_array;
+  my $type = $row[0];
+  my $adminpass = $row[1];
+  my $warn = JSON::false;
+  
+  if ((uc($type) eq 'SHA' && $adminpass eq 'Quv28EufXJxN9w/RGTDhROcKNpU=') || (uc($type) eq 'PLAIN' && $adminpass eq 'Nethesis,1234')) {
+    $warn = JSON::true;
+  }
+  
+  $ret->{'configuration'}{'admin_pass_warn'} = $warn;
+  
 } else {
     error();
 }
