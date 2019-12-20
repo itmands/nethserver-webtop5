@@ -1,0 +1,57 @@
+#!/usr/bin/php
+<?php
+  
+/*
+ * Copyright (C) 2019 Nethesis S.r.l.
+ * http://www.nethesis.it - nethserver@nethesis.it
+ *
+ * This script is part of NethServer.
+ *
+ * NethServer is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License,
+ * or any later version.
+ *
+ * NethServer is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with NethServer.  If not, see COPYING.
+*/
+
+require_once("/usr/libexec/nethserver/api/lib/Helpers.php");
+
+$data = readInput();
+$v = new LegacyValidator($data['configuration']);
+
+$timezones = explode("\n",shell_exec('java -classpath /usr/share/webtop/ ListTimeZones'));
+$localelist = explode("\n",shell_exec('/etc/e-smith/events/actions/nethserver-webtop5-locale-tz'));
+$iconsizes = array('small','medium','large');
+
+$v->declareParameter('DefaultLocale', $v->createValidator()->memberOf($localelist));
+$v->declareParameter('DefaultTimezone', $v->createValidator()->memberOf($timezones));
+$v->declareParameter('DefaultToolbarIconsSize', $v->createValidator()->memberOf($iconsizes));
+
+$v->declareParameter('SmtpAuth', Validate::SERVICESTATUS);
+$v->declareParameter('SmtpStarttls', Validate::SERVICESTATUS);
+
+if ($data['configuration']['PublicUrl']) {
+  if (! filter_var($v->parameters['PublicUrl'], FILTER_VALIDATE_URL) || (strpos($v->parameters['PublicUrl'], 'http') !== 0 )) {
+    $v->addValidationError('PublicUrl', 'InvalidPublicUrl', $v->parameters['PublicUrl']);
+  }
+}
+
+if ($data['configuration']['DavServerUrl']) {
+  if (! filter_var($v->parameters['DavServerUrl'], FILTER_VALIDATE_URL) || (strpos($v->parameters['DavServerUrl'], 'http') !== 0 )) {
+    $v->addValidationError('DavServerUrl', 'InvalidDavServerUrl', $v->parameters['DavServerUrl']);
+  }
+}
+
+# Validate the input
+if ($v->validate()) {
+  success();
+} else {
+  error($v);
+}
