@@ -37,6 +37,9 @@ $v->declareParameter('DefaultToolbarIconsSize', $v->createValidator()->memberOf(
 $v->declareParameter('SmtpAuth', Validate::SERVICESTATUS);
 $v->declareParameter('SmtpStarttls', Validate::SERVICESTATUS);
 
+$v->declareParameter('MinMemory', Validate::POSITIVE_INTEGER);
+$v->declareParameter('MaxMemory', Validate::POSITIVE_INTEGER);
+
 if ($data['configuration']['PublicUrl']) {
   if (! filter_var($v->parameters['PublicUrl'], FILTER_VALIDATE_URL) || (strpos($v->parameters['PublicUrl'], 'http') !== 0 )) {
     $v->addValidationError('PublicUrl', 'InvalidPublicUrl', $v->parameters['PublicUrl']);
@@ -47,6 +50,17 @@ if ($data['configuration']['DavServerUrl']) {
   if (! filter_var($v->parameters['DavServerUrl'], FILTER_VALIDATE_URL) || (strpos($v->parameters['DavServerUrl'], 'http') !== 0 )) {
     $v->addValidationError('DavServerUrl', 'InvalidDavServerUrl', $v->parameters['DavServerUrl']);
   }
+}
+
+if ($data['configuration']['PbxProviderNethvoiceWebrestUrl']) {
+  if (! filter_var($v->parameters['PbxProviderNethvoiceWebrestUrl'], FILTER_VALIDATE_URL) || (strpos($v->parameters['PbxProviderNethvoiceWebrestUrl'], 'http') !== 0 ) || $v->parameters['PbxProvider'] != "nethvoice") {
+    $v->addValidationError('PbxProviderNethvoiceWebrestUrl', 'InvalidNethvoiceWebrestUrl', $v->parameters['PbxProviderNethvoiceWebrestUrl']);
+  }
+}
+
+if (intval($data['configuration']['MinMemory']) > intval($data['configuration']['MaxMemory'])) {
+  $v->addValidationError('MinMemory', 'MaxMemoryHighThanMin', $v->parameters['MinMemory']);
+  $v->addValidationError('MaxMemory', 'MaxMemoryHighThanMin', $v->parameters['MaxMemory']);
 }
 
 # Validate the input

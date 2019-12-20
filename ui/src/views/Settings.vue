@@ -124,45 +124,135 @@
                   <span v-if="errors.SmtpStarttls.hasError" class="help-block">{{$t('settings.not_valid_smtp_starttls')}}</span>
                 </div>
               </div>
-              <div :class="['form-group', errors.PublicUrl.hasError ? 'has-error' : '']">
-                <label class="col-sm-5 control-label">
-                  {{$t('settings.public_url')}}
-                  <doc-info
-                    :placement="'top'"
-                    :title="$t('settings.public_url')"
-                    :chapter="'PublicUrl'"
-                    :inline="true"
-                  ></doc-info>
-                </label>
-                <div class="col-sm-5">
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="configuration.PublicUrl"
-                  >
-                  <span v-if="errors.PublicUrl.hasError" class="help-block">{{$t('settings.not_valid_public_url')}}</span>
-                </div>
-              </div>
-              <div :class="['form-group', errors.DavServerUrl.hasError ? 'has-error' : '']">
-                <label class="col-sm-5 control-label">
-                  {{$t('settings.dav_server_url')}}
-                  <doc-info
-                    :placement="'top'"
-                    :title="$t('settings.dav_server_url')"
-                    :chapter="'DavServerUrl'"
-                    :inline="true"
-                  ></doc-info>
-                </label>
-                <div class="col-sm-5">
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="configuration.DavServerUrl"
-                  >
-                  <span v-if="errors.DavServerUrl.hasError" class="help-block">{{$t('settings.not_valid_dav_server_url')}}</span>
-                </div>
-              </div>
               
+              <!-- advanced menu -->
+              <legend class="fields-section-header-pf" aria-expanded="true">
+                <span
+                  :class="['fa fa-angle-right field-section-toggle-pf', advanced ? 'fa-angle-down' : '']"
+                ></span>
+                <a
+                  class="field-section-toggle-pf"
+                  @click="toggleAdvancedMode()"
+                >{{$t('settings.advanced_mode')}}</a>
+              </legend>
+              <div v-if="advanced">
+                <div class="form-group margintop">
+                  <label class="col-sm-5 control-label">
+                    {{$t('settings.pbx_provider')}}
+                    <doc-info
+                      :placement="'top'"
+                      :title="$t('settings.pbx_provider')"
+                      :chapter="'PbxProvider'"
+                      :inline="true"
+                    ></doc-info>
+                  </label>
+                  <div class="col-sm-5">
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="configuration.PbxProvider"
+                    >
+                  </div>
+                </div>
+                <div :class="['form-group', errors.PbxProviderNethvoiceWebrestUrl.hasError ? 'has-error' : '']">
+                  <label class="col-sm-5 control-label">
+                    {{$t('settings.nethvoice_webrest_url')}}
+                    <doc-info
+                      :placement="'top'"
+                      :title="$t('settings.nethvoice_webrest_url')"
+                      :chapter="'PbxProviderNethvoiceWebrestUrl'"
+                      :inline="true"
+                    ></doc-info>
+                  </label>
+                  <div class="col-sm-5">
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="configuration.PbxProviderNethvoiceWebrestUrl"
+                    >
+                    <span v-if="errors.PbxProviderNethvoiceWebrestUrl.hasError" class="help-block">{{$t('settings.not_valid_nethvoice_webrest_url')}}</span>
+                  </div>
+                </div>
+                <div :class="['form-group', errors.MinMemory.hasError ? 'has-error' : '']">
+                  <label class="col-sm-5 control-label">
+                    {{$t('settings.min_memory')}}
+                    <doc-info
+                      :placement="'top'"
+                      :title="$t('settings.min_memory')"
+                      :chapter="'MinMemory'"
+                      :inline="true"
+                    ></doc-info>
+                  </label>
+                  <div class="col-sm-5">
+                    <input
+                      type="number"
+                      class="form-control"
+                      v-model="configuration.MinMemory"
+                      required
+                    >
+                    <span v-if="errors.MinMemory.hasError" class="help-block">{{$t('settings.not_a_number_min')}}</span>
+                  </div>
+                </div>
+                <div :class="['form-group', errors.MaxMemory.hasError ? 'has-error' : '']">
+                  <label class="col-sm-5 control-label">
+                    {{$t('settings.max_memory')}}
+                    <doc-info
+                      :placement="'top'"
+                      :title="$t('settings.max_memory')"
+                      :chapter="'MaxMemory'"
+                      :inline="true"
+                    ></doc-info>
+                  </label>
+                  <div class="col-sm-5">
+                    <input
+                      type="number"
+                      class="form-control"
+                      v-model="configuration.MaxMemory"
+                      required
+                    >
+                    <span v-if="errors.MaxMemory.hasError" class="help-block">{{$t('settings.not_a_number_max')}}</span>
+                  </div>
+                </div>
+                <div :class="['form-group', errors.PublicUrl.hasError ? 'has-error' : '']">
+                  <label class="col-sm-5 control-label">
+                    {{$t('settings.public_url')}}
+                    <doc-info
+                      :placement="'top'"
+                      :title="$t('settings.public_url')"
+                      :chapter="'PublicUrl'"
+                      :inline="true"
+                    ></doc-info>
+                  </label>
+                  <div class="col-sm-5">
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="configuration.PublicUrl"
+                    >
+                    <span v-if="errors.PublicUrl.hasError" class="help-block">{{$t('settings.not_valid_public_url')}}</span>
+                  </div>
+                </div>
+                <div :class="['form-group', errors.DavServerUrl.hasError ? 'has-error' : '']">
+                  <label class="col-sm-5 control-label">
+                    {{$t('settings.dav_server_url')}}
+                    <doc-info
+                      :placement="'top'"
+                      :title="$t('settings.dav_server_url')"
+                      :chapter="'DavServerUrl'"
+                      :inline="true"
+                    ></doc-info>
+                  </label>
+                  <div class="col-sm-5">
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="configuration.DavServerUrl"
+                    >
+                    <span v-if="errors.DavServerUrl.hasError" class="help-block">{{$t('settings.not_valid_dav_server_url')}}</span>
+                  </div>
+                </div>
+              </div>
+
               <!-- save button -->
               <div class="form-group">
                 <label class="col-sm-5 control-label">
@@ -203,9 +293,14 @@ export default {
         PublicUrl: null,
         DavServerUrl: null,
         LocaleList: null,
-        TimezonesList: null
+        TimezonesList: null,
+        PbxProvider: null,
+        PbxProviderNethvoiceWebrestUrl: null,
+        MinMemory: 512,
+        MaxMemory: 1024
       },
-      errors: this.initErrors()
+      errors: this.initErrors(),
+      advanced: false
     }
   },
   methods: {
@@ -247,7 +342,11 @@ export default {
           SmtpAuth: context.configuration.SmtpAuth,
           SmtpStarttls: context.configuration.SmtpStarttls,
           PublicUrl: context.configuration.PublicUrl,
-          DavServerUrl: context.configuration.DavServerUrl
+          DavServerUrl: context.configuration.DavServerUrl,
+          PbxProvider: context.configuration.PbxProvider,
+          PbxProviderNethvoiceWebrestUrl: context.configuration.PbxProviderNethvoiceWebrestUrl,
+          MinMemory: context.configuration.MinMemory,
+          MaxMemory: context.configuration.MaxMemory
         }
       };
       context.loaders = true;
@@ -328,8 +427,24 @@ export default {
         DavServerUrl: {
           hasError: false,
           message: ""
+        },
+        PbxProviderNethvoiceWebrestUrl: {
+          hasError: false,
+          message: ""
+        },
+        MinMemory: {
+          hasError: false,
+          message: ""
+        },
+        MaxMemory: {
+          hasError: false,
+          message: ""
         }
       }
+    },
+    toggleAdvancedMode() {
+      this.advanced = !this.advanced;
+      this.$forceUpdate();
     }
   }
 };

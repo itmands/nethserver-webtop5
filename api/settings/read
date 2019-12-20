@@ -43,6 +43,10 @@ if ($cmd eq 'configuration') {
     $ret->{'configuration'}{'SmtpStarttls'} = $db->get_prop('webtop', 'SmtpStarttls') || 'disabled';
     $ret->{'configuration'}{'PublicUrl'} = $db->get_prop('webtop', 'PublicUrl');
     $ret->{'configuration'}{'DavServerUrl'} = $db->get_prop('webtop', 'DavServerUrl');
+    $ret->{'configuration'}{'PbxProvider'} = $db->get_prop('webtop', 'PbxProvider');
+    $ret->{'configuration'}{'PbxProviderNethvoiceWebrestUrl'} = $db->get_prop('webtop', 'PbxProviderNethvoiceWebrestUrl');
+    $ret->{'configuration'}{'MinMemory'} = $db->get_prop('webtop', 'MinMemory');
+    $ret->{'configuration'}{'MaxMemory'} = $db->get_prop('webtop', 'MaxMemory');
     
     my @localelist = split("\n", `/etc/e-smith/events/actions/nethserver-webtop5-locale-tz`);
     $ret->{'configuration'}{'LocaleList'} = \@localelist;

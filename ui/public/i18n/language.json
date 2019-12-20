@@ -20,7 +20,15 @@
         "not_valid_dav_server_url": "Not valid DAV server URL",
         "small": "Small",
         "medium": "Medium",
-        "large": "Large"
+        "large": "Large",
+        "advanced_mode": "Advanced settings",
+        "pbx_provider": "PBX Provider",
+        "nethvoice_webrest_url": "NethVoice webrest URL",
+        "not_valid_nethvoice_webrest_url": "Not valid NethVoice webrest URL or PBX Provider is not set to nethvoice",
+        "min_memory": "Minimum memory",
+        "max_memory": "Maximum memory",
+        "not_a_number_min": "Value is not a number or is higher than maximum memory",
+        "not_a_number_max": "Value is not a number or is lower than minimum memory"
     },
     "about": {
         "title": "About",
@@ -29,7 +37,9 @@
     },
     "validation": {
         "InvalidPublicUrl": "Not valid public URL",
-        "InvalidDavServerUrl": "Not valid DAV server url"
+        "InvalidDavServerUrl": "Not valid DAV server URL",
+        "InvalidNethvoiceWebrestUrl": "Not valid NethVoice webrest URL or PBX Provider is not set to nethvoice",
+        "MaxMemoryHighThanMin": "Maximum memory must be higher than minimum memory"
     },
     "logs": {
         "title": "Logs",
@@ -62,7 +72,11 @@
         "SmtpAuth": "If set to enabled, it enables authentication for user sessions SMTP send. Default is disabled.",
         "SmtpStarttls": "If set to enabled, it enables STARTTLS SMTP send. Default is disabled.",
         "PublicUrl": "Public URL used to publish resources for the cloud. If not set, default is http://FQDN/webtop.",
-        "DavServerUrl": "DAV server URL for CalDAV and CardDAV clients configuration. If not set, default is https://FQDN/webtop-dav/server.php."
+        "DavServerUrl": "DAV server URL for CalDAV and CardDAV clients configuration. If not set, default is https://FQDN/webtop-dav/server.php.",
+        "PbxProvider": "PBX provider name.",
+        "PbxProviderNethvoiceWebrestUrl": "NethVoice base url for API calls, used when PbxProvider is set to nethvoice.",
+        "MinMemory": "Minimum memory of Tomcat instance. Value is expressed in MB.",
+        "MaxMemory": "Maximum memory of Tomcat instance. Value is expressed in MB."
     },
     "save": "Save",
     "cancel": "Cancel",

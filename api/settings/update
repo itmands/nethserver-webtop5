@@ -44,7 +44,11 @@ my %props2 = ();
       'SmtpAuth' => $input->{'configuration'}->{'SmtpAuth'},
       'SmtpStarttls' => $input->{'configuration'}->{'SmtpStarttls'},
       'PublicUrl' => $input->{'configuration'}->{'PublicUrl'},
-      'DavServerUrl' => $input->{'configuration'}->{'DavServerUrl'}
+      'DavServerUrl' => $input->{'configuration'}->{'DavServerUrl'},
+      'PbxProvider' => $input->{'configuration'}->{'PbxProvider'},
+      'PbxProviderNethvoiceWebrestUrl' => $input->{'configuration'}->{'PbxProviderNethvoiceWebrestUrl'},
+      'MinMemory' => $input->{'configuration'}->{'MinMemory'},
+      'MaxMemory' => $input->{'configuration'}->{'MaxMemory'}
   );
     
 if($input->{'action'} eq 'edit') {
