@@ -60,7 +60,7 @@ if ($cmd eq 'configuration') {
   my $adminpass = $row[1];
   my $warn = JSON::false;
   
-  if ((uc($type) eq 'SHA' && $adminpass eq 'Quv28EufXJxN9w/RGTDhROcKNpU=') || (uc($type) eq 'PLAIN' && $adminpass eq 'Nethesis,1234')) {
+  if ((uc($type) eq 'SHA' && $adminpass eq '0DPiKuNIrrVmD8IUCuw1hQxNqZc=') || (uc($type) eq 'PLAIN' && $adminpass eq 'admin')) {
     $warn = JSON::true;
   }
   
