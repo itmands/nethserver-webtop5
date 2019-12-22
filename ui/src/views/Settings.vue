@@ -357,7 +357,15 @@ export default {
         null,
         function(success) {
           context.loaders = false;
-
+          
+          nethserver.notifications.success = context.$i18n.t(
+            "settings.settings_updated_ok"
+          );
+          
+          nethserver.notifications.error = context.$i18n.t(
+            "settings.settings_updated_error"
+          );
+          
           // update values
           nethserver.exec(
             ["nethserver-webtop5/settings/update"],
@@ -367,15 +375,9 @@ export default {
             },
             function(success) {
               context.getConfig();
-              nethserver.notifications.success = context.$i18n.t(
-                "settings.settings_updated_ok"
-              );
             },
             function(error, data) {
               console.error(error, data);
-              nethserver.notifications.error = context.$i18n.t(
-                "settings.settings_updated_error"
-              );
             },
             true //sudo
           );
