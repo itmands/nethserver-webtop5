@@ -227,6 +227,7 @@
                     type="text"
                     class="form-control"
                     v-model="configuration.PublicUrl"
+                    :placeholder="configuration.PlaceholderPublicUrl"
                   >
                   <span v-if="errors.PublicUrl.hasError" class="help-block">{{$t('settings.not_valid_public_url')}}</span>
                 </div>
@@ -246,6 +247,7 @@
                     type="text"
                     class="form-control"
                     v-model="configuration.DavServerUrl"
+                    :placeholder="configuration.PlaceholderDavServerUrl"
                   >
                   <span v-if="errors.DavServerUrl.hasError" class="help-block">{{$t('settings.not_valid_dav_server_url')}}</span>
                 </div>
@@ -295,7 +297,9 @@ export default {
         PbxProvider: null,
         PbxProviderNethvoiceWebrestUrl: null,
         MinMemory: 512,
-        MaxMemory: 1024
+        MaxMemory: 1024,
+        PlaceholderPublicUrl: null,
+        PlaceholderDavServerUrl: null
       },
       errors: this.initErrors(),
       advanced: false

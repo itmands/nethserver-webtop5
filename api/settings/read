@@ -54,6 +54,10 @@ if ($cmd eq 'configuration') {
     my @timezones = split("\n", `java -classpath /usr/share/webtop/ ListTimeZones`);
     $ret->{'configuration'}{'TimezonesList'} = \@timezones;
     
+    my $hostname = `/usr/bin/hostname`;
+    $ret->{'configuration'}{'PlaceholderPublicUrl'} = 'http://' . $hostname . '/webtop';
+    $ret->{'configuration'}{'PlaceholderDavServerUrl'} = 'https://' . $hostname . '/webtop-dav/server.php';
+    
 } else {
     error();
 }
