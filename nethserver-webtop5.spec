@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.4.3
+Version: 1.4.4
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -97,6 +97,11 @@ cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 %doc README.rst
 
 %changelog
+* Tue Jan 07 2020 Matteo Valentini <matteo.valentini@nethesis.it> - 1.4.4-1
+- WebTop 5.7.7 - NethServer/dev#5985
+  - systemd: redirect catalina output to stdout
+  - Fix systemd drop-in path
+
 * Mon Dec 09 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.3-1
 - Inventory: add new application facts - NethServer/dev#5979
 
