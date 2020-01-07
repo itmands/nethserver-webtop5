@@ -82,48 +82,6 @@
                   <span v-if="errors.DefaultToolbarIconsSize.hasError" class="help-block">{{$t('settings.not_valid_default_toolbar_icons_size')}}</span>
                 </div>
               </div>
-              <div :class="['form-group', errors.SmtpAuth.hasError ? 'has-error' : '']">
-                <label class="col-sm-5 control-label">
-                  {{$t('settings.smtp_auth')}}
-                  <doc-info
-                    :placement="'top'"
-                    :title="$t('settings.smtp_auth')"
-                    :chapter="'SmtpAuth'"
-                    :inline="true"
-                  ></doc-info>
-                </label>
-                <div class="col-sm-5">
-                  <input
-                    v-model="configuration.SmtpAuth"
-                    type="checkbox"
-                    class="form-control"
-                    true-value="enabled"
-                    false-value="disabled"
-                  >
-                  <span v-if="errors.SmtpAuth.hasError" class="help-block">{{$t('settings.not_valid_smtp_auth')}}</span>
-                </div>
-              </div>
-              <div :class="['form-group', errors.SmtpStarttls.hasError ? 'has-error' : '']">
-                <label class="col-sm-5 control-label">
-                  {{$t('settings.smtp_starttls')}}
-                  <doc-info
-                    :placement="'top'"
-                    :title="$t('settings.smtp_starttls')"
-                    :chapter="'SmtpStarttls'"
-                    :inline="true"
-                  ></doc-info>
-                </label>
-                <div class="col-sm-5">
-                  <input
-                    v-model="configuration.SmtpStarttls"
-                    type="checkbox"
-                    class="form-control"
-                    true-value="enabled"
-                    false-value="disabled"
-                  >
-                  <span v-if="errors.SmtpStarttls.hasError" class="help-block">{{$t('settings.not_valid_smtp_starttls')}}</span>
-                </div>
-              </div>
               
               <!-- advanced menu -->
               <legend class="fields-section-header-pf" aria-expanded="true">
@@ -136,7 +94,49 @@
                 >{{$t('settings.advanced_mode')}}</a>
               </legend>
               <div v-if="advanced">
-                <div class="form-group margintop">
+                <div :class="['form-group margintop', errors.SmtpAuth.hasError ? 'has-error' : '']">
+                  <label class="col-sm-5 control-label">
+                    {{$t('settings.smtp_auth')}}
+                    <doc-info
+                      :placement="'top'"
+                      :title="$t('settings.smtp_auth')"
+                      :chapter="'SmtpAuth'"
+                      :inline="true"
+                    ></doc-info>
+                  </label>
+                  <div class="col-sm-5">
+                    <input
+                      v-model="configuration.SmtpAuth"
+                      type="checkbox"
+                      class="form-control"
+                      true-value="enabled"
+                      false-value="disabled"
+                    >
+                    <span v-if="errors.SmtpAuth.hasError" class="help-block">{{$t('settings.not_valid_smtp_auth')}}</span>
+                  </div>
+                </div>
+                <div :class="['form-group', errors.SmtpStarttls.hasError ? 'has-error' : '']">
+                  <label class="col-sm-5 control-label">
+                    {{$t('settings.smtp_starttls')}}
+                    <doc-info
+                      :placement="'top'"
+                      :title="$t('settings.smtp_starttls')"
+                      :chapter="'SmtpStarttls'"
+                      :inline="true"
+                    ></doc-info>
+                  </label>
+                  <div class="col-sm-5">
+                    <input
+                      v-model="configuration.SmtpStarttls"
+                      type="checkbox"
+                      class="form-control"
+                      true-value="enabled"
+                      false-value="disabled"
+                    >
+                    <span v-if="errors.SmtpStarttls.hasError" class="help-block">{{$t('settings.not_valid_smtp_starttls')}}</span>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="col-sm-5 control-label">
                     {{$t('settings.pbx_provider')}}
                     <doc-info
