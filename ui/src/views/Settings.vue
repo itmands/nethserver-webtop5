@@ -16,255 +16,253 @@
       <form class="form-horizontal" v-on:submit.prevent="saveConfig()">
         <div class="row">
           <div class="col-lg-12">
-            <div class="col-md-6">
-              <div :class="['form-group margintop', errors.DefaultLocale.hasError ? 'has-error' : '']">
-                <label class="col-sm-5 control-label">
-                  {{$t('settings.default_locale')}}
+            <div :class="['form-group margintop', errors.DefaultLocale.hasError ? 'has-error' : '']">
+              <label class="col-sm-2 control-label">
+                {{$t('settings.default_locale')}}
+                <doc-info
+                  :placement="'top'"
+                  :title="$t('settings.default_locale')"
+                  :chapter="'DefaultLocale'"
+                  :inline="true"
+                ></doc-info>
+              </label>
+              <div class="col-sm-2">
+                <select
+                  required
+                  v-model="configuration.DefaultLocale"
+                  class="combobox form-control"
+                >
+                  <option v-for="(t,i) in configuration.LocaleList" v-bind:key="i">{{t}}</option>
+                </select>
+                <span v-if="errors.DefaultLocale.hasError" class="help-block">{{$t('settings.not_valid_default_locale')}}</span>
+              </div>
+            </div>
+            <div :class="['form-group', errors.DefaultTimezone.hasError ? 'has-error' : '']">
+              <label class="col-sm-2 control-label">
+                {{$t('settings.default_timezone')}}
+                <doc-info
+                  :placement="'top'"
+                  :title="$t('settings.default_timezone')"
+                  :chapter="'DefaultTimezone'"
+                  :inline="true"
+                ></doc-info>
+              </label>
+              <div class="col-sm-2">
+                <select
+                  required
+                  v-model="configuration.DefaultTimezone"
+                  class="combobox form-control"
+                >
+                  <option v-for="(t,i) in configuration.TimezonesList" v-bind:key="i">{{t}}</option>
+                </select>
+                <span v-if="errors.DefaultTimezone.hasError" class="help-block">{{$t('settings.not_valid_default_timezone')}}</span>
+              </div>
+            </div>
+            <div :class="['form-group', errors.DefaultToolbarIconsSize.hasError ? 'has-error' : '']">
+              <label class="col-sm-2 control-label">
+                {{$t('settings.default_toolbar_icons_size')}}
+                <doc-info
+                  :placement="'top'"
+                  :title="$t('settings.default_toolbar_icons_size')"
+                  :chapter="'DefaultToolbarIconsSize'"
+                  :inline="true"
+                ></doc-info>
+              </label>
+              <div class="col-sm-2">
+                <select
+                  required
+                  v-model="configuration.DefaultToolbarIconsSize"
+                  class="combobox form-control"
+                >
+                  <option value="small">{{$t('settings.small')}}</option>
+                  <option value="medium">{{$t('settings.medium')}}</option>
+                  <option value="large">{{$t('settings.large')}}</option>
+                </select>
+                <span v-if="errors.DefaultToolbarIconsSize.hasError" class="help-block">{{$t('settings.not_valid_default_toolbar_icons_size')}}</span>
+              </div>
+            </div>
+            
+            <!-- advanced menu -->
+            <legend class="fields-section-header-pf" aria-expanded="true">
+              <span
+                :class="['fa fa-angle-right field-section-toggle-pf', advanced ? 'fa-angle-down' : '']"
+              ></span>
+              <a
+                class="field-section-toggle-pf"
+                @click="toggleAdvancedMode()"
+              >{{$t('settings.advanced_mode')}}</a>
+            </legend>
+            <div v-if="advanced">
+              <div :class="['form-group margintop', errors.SmtpAuth.hasError ? 'has-error' : '']">
+                <label class="col-sm-2 control-label">
+                  {{$t('settings.smtp_auth')}}
                   <doc-info
                     :placement="'top'"
-                    :title="$t('settings.default_locale')"
-                    :chapter="'DefaultLocale'"
+                    :title="$t('settings.smtp_auth')"
+                    :chapter="'SmtpAuth'"
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-5">
-                  <select
-                    required
-                    v-model="configuration.DefaultLocale"
-                    class="combobox form-control"
+                <div class="col-sm-2">
+                  <input
+                    v-model="configuration.SmtpAuth"
+                    type="checkbox"
+                    class="form-control"
+                    true-value="enabled"
+                    false-value="disabled"
                   >
-                    <option v-for="(t,i) in configuration.LocaleList" v-bind:key="i">{{t}}</option>
-                  </select>
-                  <span v-if="errors.DefaultLocale.hasError" class="help-block">{{$t('settings.not_valid_default_locale')}}</span>
+                  <span v-if="errors.SmtpAuth.hasError" class="help-block">{{$t('settings.not_valid_smtp_auth')}}</span>
                 </div>
               </div>
-              <div :class="['form-group', errors.DefaultTimezone.hasError ? 'has-error' : '']">
-                <label class="col-sm-5 control-label">
-                  {{$t('settings.default_timezone')}}
+              <div :class="['form-group', errors.SmtpStarttls.hasError ? 'has-error' : '']">
+                <label class="col-sm-2 control-label">
+                  {{$t('settings.smtp_starttls')}}
                   <doc-info
                     :placement="'top'"
-                    :title="$t('settings.default_timezone')"
-                    :chapter="'DefaultTimezone'"
+                    :title="$t('settings.smtp_starttls')"
+                    :chapter="'SmtpStarttls'"
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-5">
-                  <select
-                    required
-                    v-model="configuration.DefaultTimezone"
-                    class="combobox form-control"
+                <div class="col-sm-2">
+                  <input
+                    v-model="configuration.SmtpStarttls"
+                    type="checkbox"
+                    class="form-control"
+                    true-value="enabled"
+                    false-value="disabled"
                   >
-                    <option v-for="(t,i) in configuration.TimezonesList" v-bind:key="i">{{t}}</option>
-                  </select>
-                  <span v-if="errors.DefaultTimezone.hasError" class="help-block">{{$t('settings.not_valid_default_timezone')}}</span>
+                  <span v-if="errors.SmtpStarttls.hasError" class="help-block">{{$t('settings.not_valid_smtp_starttls')}}</span>
                 </div>
               </div>
-              <div :class="['form-group', errors.DefaultToolbarIconsSize.hasError ? 'has-error' : '']">
-                <label class="col-sm-5 control-label">
-                  {{$t('settings.default_toolbar_icons_size')}}
-                  <doc-info
-                    :placement="'top'"
-                    :title="$t('settings.default_toolbar_icons_size')"
-                    :chapter="'DefaultToolbarIconsSize'"
-                    :inline="true"
-                  ></doc-info>
-                </label>
-                <div class="col-sm-5">
-                  <select
-                    required
-                    v-model="configuration.DefaultToolbarIconsSize"
-                    class="combobox form-control"
-                  >
-                    <option value="small">{{$t('settings.small')}}</option>
-                    <option value="medium">{{$t('settings.medium')}}</option>
-                    <option value="large">{{$t('settings.large')}}</option>
-                  </select>
-                  <span v-if="errors.DefaultToolbarIconsSize.hasError" class="help-block">{{$t('settings.not_valid_default_toolbar_icons_size')}}</span>
-                </div>
-              </div>
-              
-              <!-- advanced menu -->
-              <legend class="fields-section-header-pf" aria-expanded="true">
-                <span
-                  :class="['fa fa-angle-right field-section-toggle-pf', advanced ? 'fa-angle-down' : '']"
-                ></span>
-                <a
-                  class="field-section-toggle-pf"
-                  @click="toggleAdvancedMode()"
-                >{{$t('settings.advanced_mode')}}</a>
-              </legend>
-              <div v-if="advanced">
-                <div :class="['form-group margintop', errors.SmtpAuth.hasError ? 'has-error' : '']">
-                  <label class="col-sm-5 control-label">
-                    {{$t('settings.smtp_auth')}}
-                    <doc-info
-                      :placement="'top'"
-                      :title="$t('settings.smtp_auth')"
-                      :chapter="'SmtpAuth'"
-                      :inline="true"
-                    ></doc-info>
-                  </label>
-                  <div class="col-sm-5">
-                    <input
-                      v-model="configuration.SmtpAuth"
-                      type="checkbox"
-                      class="form-control"
-                      true-value="enabled"
-                      false-value="disabled"
-                    >
-                    <span v-if="errors.SmtpAuth.hasError" class="help-block">{{$t('settings.not_valid_smtp_auth')}}</span>
-                  </div>
-                </div>
-                <div :class="['form-group', errors.SmtpStarttls.hasError ? 'has-error' : '']">
-                  <label class="col-sm-5 control-label">
-                    {{$t('settings.smtp_starttls')}}
-                    <doc-info
-                      :placement="'top'"
-                      :title="$t('settings.smtp_starttls')"
-                      :chapter="'SmtpStarttls'"
-                      :inline="true"
-                    ></doc-info>
-                  </label>
-                  <div class="col-sm-5">
-                    <input
-                      v-model="configuration.SmtpStarttls"
-                      type="checkbox"
-                      class="form-control"
-                      true-value="enabled"
-                      false-value="disabled"
-                    >
-                    <span v-if="errors.SmtpStarttls.hasError" class="help-block">{{$t('settings.not_valid_smtp_starttls')}}</span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-5 control-label">
-                    {{$t('settings.pbx_provider')}}
-                    <doc-info
-                      :placement="'top'"
-                      :title="$t('settings.pbx_provider')"
-                      :chapter="'PbxProvider'"
-                      :inline="true"
-                    ></doc-info>
-                  </label>
-                  <div class="col-sm-5">
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="configuration.PbxProvider"
-                    >
-                  </div>
-                </div>
-                <div :class="['form-group', errors.PbxProviderNethvoiceWebrestUrl.hasError ? 'has-error' : '']">
-                  <label class="col-sm-5 control-label">
-                    {{$t('settings.nethvoice_webrest_url')}}
-                    <doc-info
-                      :placement="'top'"
-                      :title="$t('settings.nethvoice_webrest_url')"
-                      :chapter="'PbxProviderNethvoiceWebrestUrl'"
-                      :inline="true"
-                    ></doc-info>
-                  </label>
-                  <div class="col-sm-5">
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="configuration.PbxProviderNethvoiceWebrestUrl"
-                    >
-                    <span v-if="errors.PbxProviderNethvoiceWebrestUrl.hasError" class="help-block">{{$t('settings.not_valid_nethvoice_webrest_url')}}</span>
-                  </div>
-                </div>
-                <div :class="['form-group', errors.MinMemory.hasError ? 'has-error' : '']">
-                  <label class="col-sm-5 control-label">
-                    {{$t('settings.min_memory')}}
-                    <doc-info
-                      :placement="'top'"
-                      :title="$t('settings.min_memory')"
-                      :chapter="'MinMemory'"
-                      :inline="true"
-                    ></doc-info>
-                  </label>
-                  <div class="col-sm-5">
-                    <input
-                      type="number"
-                      class="form-control"
-                      v-model="configuration.MinMemory"
-                      required
-                    >
-                    <span v-if="errors.MinMemory.hasError" class="help-block">{{$t('settings.not_a_number_min')}}</span>
-                  </div>
-                </div>
-                <div :class="['form-group', errors.MaxMemory.hasError ? 'has-error' : '']">
-                  <label class="col-sm-5 control-label">
-                    {{$t('settings.max_memory')}}
-                    <doc-info
-                      :placement="'top'"
-                      :title="$t('settings.max_memory')"
-                      :chapter="'MaxMemory'"
-                      :inline="true"
-                    ></doc-info>
-                  </label>
-                  <div class="col-sm-5">
-                    <input
-                      type="number"
-                      class="form-control"
-                      v-model="configuration.MaxMemory"
-                      required
-                    >
-                    <span v-if="errors.MaxMemory.hasError" class="help-block">{{$t('settings.not_a_number_max')}}</span>
-                  </div>
-                </div>
-                <div :class="['form-group', errors.PublicUrl.hasError ? 'has-error' : '']">
-                  <label class="col-sm-5 control-label">
-                    {{$t('settings.public_url')}}
-                    <doc-info
-                      :placement="'top'"
-                      :title="$t('settings.public_url')"
-                      :chapter="'PublicUrl'"
-                      :inline="true"
-                    ></doc-info>
-                  </label>
-                  <div class="col-sm-5">
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="configuration.PublicUrl"
-                    >
-                    <span v-if="errors.PublicUrl.hasError" class="help-block">{{$t('settings.not_valid_public_url')}}</span>
-                  </div>
-                </div>
-                <div :class="['form-group', errors.DavServerUrl.hasError ? 'has-error' : '']">
-                  <label class="col-sm-5 control-label">
-                    {{$t('settings.dav_server_url')}}
-                    <doc-info
-                      :placement="'top'"
-                      :title="$t('settings.dav_server_url')"
-                      :chapter="'DavServerUrl'"
-                      :inline="true"
-                    ></doc-info>
-                  </label>
-                  <div class="col-sm-5">
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="configuration.DavServerUrl"
-                    >
-                    <span v-if="errors.DavServerUrl.hasError" class="help-block">{{$t('settings.not_valid_dav_server_url')}}</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- save button -->
               <div class="form-group">
-                <label class="col-sm-5 control-label">
+                <label class="col-sm-2 control-label">
+                  {{$t('settings.pbx_provider')}}
+                  <doc-info
+                    :placement="'top'"
+                    :title="$t('settings.pbx_provider')"
+                    :chapter="'PbxProvider'"
+                    :inline="true"
+                  ></doc-info>
                 </label>
-                <div class="col-sm-5">
-                  <button 
-                    class="btn btn-primary margintop" 
-                    type="submit"
+                <div class="col-sm-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="configuration.PbxProvider"
                   >
-                    {{$t('save')}}
-                  </button>
                 </div>
+              </div>
+              <div :class="['form-group', errors.PbxProviderNethvoiceWebrestUrl.hasError ? 'has-error' : '']">
+                <label class="col-sm-2 control-label">
+                  {{$t('settings.nethvoice_webrest_url')}}
+                  <doc-info
+                    :placement="'top'"
+                    :title="$t('settings.nethvoice_webrest_url')"
+                    :chapter="'PbxProviderNethvoiceWebrestUrl'"
+                    :inline="true"
+                  ></doc-info>
+                </label>
+                <div class="col-sm-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="configuration.PbxProviderNethvoiceWebrestUrl"
+                  >
+                  <span v-if="errors.PbxProviderNethvoiceWebrestUrl.hasError" class="help-block">{{$t('settings.not_valid_nethvoice_webrest_url')}}</span>
+                </div>
+              </div>
+              <div :class="['form-group', errors.MinMemory.hasError ? 'has-error' : '']">
+                <label class="col-sm-2 control-label">
+                  {{$t('settings.min_memory')}}
+                  <doc-info
+                    :placement="'top'"
+                    :title="$t('settings.min_memory')"
+                    :chapter="'MinMemory'"
+                    :inline="true"
+                  ></doc-info>
+                </label>
+                <div class="col-sm-2">
+                  <input
+                    type="number"
+                    class="form-control"
+                    v-model="configuration.MinMemory"
+                    required
+                  >
+                  <span v-if="errors.MinMemory.hasError" class="help-block">{{$t('settings.not_a_number_min')}}</span>
+                </div>
+              </div>
+              <div :class="['form-group', errors.MaxMemory.hasError ? 'has-error' : '']">
+                <label class="col-sm-2 control-label">
+                  {{$t('settings.max_memory')}}
+                  <doc-info
+                    :placement="'top'"
+                    :title="$t('settings.max_memory')"
+                    :chapter="'MaxMemory'"
+                    :inline="true"
+                  ></doc-info>
+                </label>
+                <div class="col-sm-2">
+                  <input
+                    type="number"
+                    class="form-control"
+                    v-model="configuration.MaxMemory"
+                    required
+                  >
+                  <span v-if="errors.MaxMemory.hasError" class="help-block">{{$t('settings.not_a_number_max')}}</span>
+                </div>
+              </div>
+              <div :class="['form-group', errors.PublicUrl.hasError ? 'has-error' : '']">
+                <label class="col-sm-2 control-label">
+                  {{$t('settings.public_url')}}
+                  <doc-info
+                    :placement="'top'"
+                    :title="$t('settings.public_url')"
+                    :chapter="'PublicUrl'"
+                    :inline="true"
+                  ></doc-info>
+                </label>
+                <div class="col-sm-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="configuration.PublicUrl"
+                  >
+                  <span v-if="errors.PublicUrl.hasError" class="help-block">{{$t('settings.not_valid_public_url')}}</span>
+                </div>
+              </div>
+              <div :class="['form-group', errors.DavServerUrl.hasError ? 'has-error' : '']">
+                <label class="col-sm-2 control-label">
+                  {{$t('settings.dav_server_url')}}
+                  <doc-info
+                    :placement="'top'"
+                    :title="$t('settings.dav_server_url')"
+                    :chapter="'DavServerUrl'"
+                    :inline="true"
+                  ></doc-info>
+                </label>
+                <div class="col-sm-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="configuration.DavServerUrl"
+                  >
+                  <span v-if="errors.DavServerUrl.hasError" class="help-block">{{$t('settings.not_valid_dav_server_url')}}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- save button -->
+            <div class="form-group">
+              <label class="col-sm-2 control-label">
+              </label>
+              <div class="col-sm-2">
+                <button 
+                  class="btn btn-primary margintop" 
+                  type="submit"
+                >
+                  {{$t('save')}}
+                </button>
               </div>
             </div>
           </div>
