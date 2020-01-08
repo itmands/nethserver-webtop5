@@ -26,7 +26,7 @@
                   :inline="true"
                 ></doc-info>
               </label>
-              <div class="col-sm-2">
+              <div class="col-sm-5">
                 <select
                   required
                   v-model="configuration.DefaultLocale"
@@ -47,7 +47,7 @@
                   :inline="true"
                 ></doc-info>
               </label>
-              <div class="col-sm-2">
+              <div class="col-sm-5">
                 <select
                   required
                   v-model="configuration.DefaultTimezone"
@@ -68,7 +68,7 @@
                   :inline="true"
                 ></doc-info>
               </label>
-              <div class="col-sm-2">
+              <div class="col-sm-5">
                 <select
                   required
                   v-model="configuration.DefaultToolbarIconsSize"
@@ -103,7 +103,7 @@
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-2">
+                <div class="col-sm-5">
                   <input
                     v-model="configuration.SmtpAuth"
                     type="checkbox"
@@ -124,7 +124,7 @@
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-2">
+                <div class="col-sm-5">
                   <input
                     v-model="configuration.SmtpStarttls"
                     type="checkbox"
@@ -145,7 +145,7 @@
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-2">
+                <div class="col-sm-5">
                   <input
                     type="text"
                     class="form-control"
@@ -163,7 +163,7 @@
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-2">
+                <div class="col-sm-5">
                   <input
                     type="text"
                     class="form-control"
@@ -182,7 +182,7 @@
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-2">
+                <div class="col-sm-5">
                   <input
                     type="number"
                     class="form-control"
@@ -202,7 +202,7 @@
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-2">
+                <div class="col-sm-5">
                   <input
                     type="number"
                     class="form-control"
@@ -222,7 +222,7 @@
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-2">
+                <div class="col-sm-5">
                   <input
                     type="text"
                     class="form-control"
@@ -242,7 +242,7 @@
                     :inline="true"
                   ></doc-info>
                 </label>
-                <div class="col-sm-2">
+                <div class="col-sm-5">
                   <input
                     type="text"
                     class="form-control"
@@ -258,7 +258,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">
               </label>
-              <div class="col-sm-2">
+              <div class="col-sm-5">
                 <button 
                   class="btn btn-primary margintop" 
                   type="submit"
