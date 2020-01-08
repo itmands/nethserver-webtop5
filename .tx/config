@@ -6,4 +6,7 @@ source_file = locale/nethserver-webtop5.pot
 source_lang = en
 type = PO
 
-
+[nethserver.CockpitWebtop5]
+source_file = ui/public/i18n/language.json
+source_lang = en
+type = KEYVALUEJSON

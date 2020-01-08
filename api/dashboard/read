@@ -1,0 +1,73 @@
+#!/usr/bin/perl
+
+#
+# Copyright (C) 2019 Nethesis S.r.l.
+# http://www.nethesis.it - nethserver@nethesis.it
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see COPYING.
+#
+
+use strict;
+use warnings;
+use DBI;
+use JSON;
+use NethServer::Password;
+
+require '/usr/libexec/nethserver/api/lib/helper_functions.pl';
+
+my $input = readInput();
+my $cmd = $input->{'action'};
+
+my $ret = {};
+
+if ($cmd eq 'configuration') {
+  
+  my $password = NethServer::Password::store("webtop5") ;
+  my $webtopdb = DBI->connect("DBI:Pg:dbname=webtop5;host=localhost", "sonicle", $password);
+  my @row;
+  
+  my $query = $webtopdb->prepare("select service_id, value from core.settings where key = 'manifest.version' and service_id <> 'com.sonicle.webtop.core.admin'");
+  $query->execute();
+  
+  while (@row = $query->fetchrow_array) {
+    my $module = substr($row[0], 19);
+    $ret->{'configuration'}{'version'}{$module} = $row[1];
+  }
+  
+  $query = $webtopdb->prepare("select user_id from core.users where type = 'U' and domain_id = 'NethServer';");
+  my $users = $query->execute();
+  
+  $ret->{'configuration'}{'active_users'} = $users;
+  
+  # read pass and check if is changed
+  $query = $webtopdb->prepare("select password_type,password from core.local_vault where user_id = 'admin';");
+  $query->execute();
+  @row = $query->fetchrow_array;
+  my $type = $row[0];
+  my $adminpass = $row[1];
+  my $warn = JSON::false;
+  
+  if ((uc($type) eq 'SHA' && $adminpass eq '0DPiKuNIrrVmD8IUCuw1hQxNqZc=') || (uc($type) eq 'PLAIN' && $adminpass eq 'admin')) {
+    $warn = JSON::true;
+  }
+  
+  $ret->{'configuration'}{'admin_pass_warn'} = $warn;
+  
+} else {
+    error();
+}
+
+print encode_json($ret);
