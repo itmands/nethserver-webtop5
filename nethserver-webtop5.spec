@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.4.4
+Version: 1.5.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -97,6 +97,11 @@ cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 %doc README.rst
 
 %changelog
+* Wed Jan 08 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.0-1
+- Webtop 5: the SMTP STARTTLS value is changed even if not required - Bug NethServer/dev#6018
+- Cockpit: add WebTop 5 interface - NethServer/dev#6003
+- Cockpit: change package Dashboard page title - NethServer/dev#6004
+
 * Tue Jan 07 2020 Matteo Valentini <matteo.valentini@nethesis.it> - 1.4.4-1
 - WebTop 5.7.7 - NethServer/dev#5985
   - systemd: redirect catalina output to stdout
