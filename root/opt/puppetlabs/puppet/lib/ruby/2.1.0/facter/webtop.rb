@@ -7,7 +7,15 @@ Facter.add('webtop') do
         webtop = {}
         pass = File.read("/var/lib/nethserver/secrets/webtop5").strip
 
-        for t in ['core.users', 'core.shares', 'calendar.calendars', 'contacts.contacts'] do
+        query_users = Facter::Core::Execution.exec("psql 'postgresql://sonicle:#{pass}@localhost:5432/webtop5' -Aqt -c \"select user_id from core.users where type = 'U' and user_id != 'admin'\"")
+        actual_users = query_users.split("\n")
+
+        query_provider = Facter::Core::Execution.exec("/usr/libexec/nethserver/list-users -s | jq -r 'keys | .[]'")
+        provider_user = query_provider.split("\n")
+
+        webtop['users'] = (actual_users & provider_user).length
+
+        for t in ['core.shares', 'calendar.calendars', 'contacts.contacts'] do
             out = Facter::Core::Execution.exec("psql 'postgresql://sonicle:#{pass}@localhost:5432/webtop5' -Aqt -c 'select count(*) from #{t}'")
             webtop[t.split('.')[1]] = out.to_i
         end
