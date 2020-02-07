@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.5.0
+Version: 1.5.1
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -97,6 +97,9 @@ cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 %doc README.rst
 
 %changelog
+* Fri Feb 07 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.1-1
+- Webtop: separate admin users to standard users - Bug Nethserver/dev#6051
+
 * Wed Jan 08 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.0-1
 - Webtop 5: the SMTP STARTTLS value is changed even if not required - Bug NethServer/dev#6018
 - Cockpit: add WebTop 5 interface - NethServer/dev#6003
