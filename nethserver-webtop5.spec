@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.5.1
+Version: 1.5.2
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -101,6 +101,11 @@ cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 %doc README.rst
 
 %changelog
+* Wed Mar 04 2020 Matteo Valentini <matteo.valentini@nethesis.it> - 1.5.2-1
+- WebTop 5.8.1 - NethServer/dev#6060
+  - Move log config inside webtop.properties
+  - Add webtop config dir
+
 * Fri Feb 07 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.1-1
 - Webtop: separate admin users to standard users - Bug Nethserver/dev#6051
 
