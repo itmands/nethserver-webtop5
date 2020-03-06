@@ -210,5 +210,8 @@ print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\"
 print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.contacts', 'default.showby', 'lnfn'
               WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE key = 'com.sonicle.webtop.contacts' and service_id = 'default.showby');\n";
 
+# Change old default SMTP port to the new one
+print $fh "UPDATE \"core\".\"settings\" SET value = '10587' WHERE key = 'smtp.port' AND service_id = 'com.sonicle.webtop.core' AND value = '587'";
+
 # Execute SQL script
 system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");
