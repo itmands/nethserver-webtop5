@@ -1,0 +1,13 @@
+{
+    #
+    # issue6080 - remove SMTP properties
+    #
+    
+    use esmith::ConfigDB;
+
+    my $configDb = esmith::ConfigDB->open() || return '';
+    $configDb->get_prop_and_delete('webtop','SmtpAuth');
+    $configDb->get_prop_and_delete('webtop','SmtpStarttls');
+
+    '';
+}
