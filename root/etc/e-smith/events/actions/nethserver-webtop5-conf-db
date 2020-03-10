@@ -178,21 +178,6 @@ my $default_toolbar_icons_size = $db->get_prop('webtop','DefaultToolBarIconsSize
 print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'default.viewport.header.scale';\n";
 print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'default.viewport.header.scale', '$default_toolbar_icons_size');\n";
 
-#set SMTP Auth (default false)
-my $smtp_auth = $db->get_prop('webtop','SmtpAuth') || "disabled";
-if ($smtp_auth eq "enabled") { $smtp_auth = "true"; } elsif ($smtp_auth eq "disabled") { $smtp_auth = "false"; }
-
-print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'smtp.auth';\n";
-print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'smtp.auth', '$smtp_auth');\n";
-
-
-#set SMTP STARTTLS (default false)
-my $smtp_starttls = $db->get_prop('webtop','SmtpStarttls') || "disabled";
-if ($smtp_starttls eq "enabled") { $smtp_starttls = "true"; } elsif ($smtp_starttls eq "disabled") { $smtp_starttls = "false"; }
-
-print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'smtp.starttls';\n";
-print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'smtp.starttls', '$smtp_starttls');\n";
-
 # Set remote calendar automatic synchronization
 my $remote_calendar_autosync = $db->get_prop('webtop','RemoteCalendarAutosync') || 'enabled';
 if ($remote_calendar_autosync eq "enabled") { $remote_calendar_autosync = "true"; } elsif ($remote_calendar_autosync eq "disabled") { $remote_calendar_autosync = "false"; }
@@ -224,6 +209,21 @@ print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\"
 # Set default field to use for ordering contacts to lastname
 print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.contacts', 'default.showby', 'lnfn'
               WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE key = 'com.sonicle.webtop.contacts' and service_id = 'default.showby');\n";
+
+# Change old default SMTP port to the new one
+print $fh "UPDATE \"core\".\"settings\" SET value = '10587' WHERE key = 'smtp.port' AND service_id = 'com.sonicle.webtop.core' AND value = '587'";
+
+# Migrate old SMTP defaults
+my $sonicle_password = NethServer::Password::store('webtop5');
+my $out = `PGPASSWORD=$sonicle_password psql -U sonicle -c "COPY(select value from core.settings where key = 'smtp.host' or key = 'smtp.port') TO STDOUT" webtop5`;
+chomp $out;
+my ($smtp_host,$smtp_port) = split(/\n/,$out);
+if ($smtp_host eq 'localhost' && $smtp_port eq '587') {
+    print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'smtp.auth';\n";
+    print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'smtp.auth', 'true');\n";
+    print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'smtp.port';\n";
+    print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'smtp.port', '10587');\n";
+}
 
 # Execute SQL script
 system("su - postgres  -c 'psql webtop5 < ".$fh->filename."' >/dev/null");
