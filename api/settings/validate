@@ -34,9 +34,6 @@ $v->declareParameter('DefaultLocale', $v->createValidator()->memberOf($localelis
 $v->declareParameter('DefaultTimezone', $v->createValidator()->memberOf($timezones));
 $v->declareParameter('DefaultToolbarIconsSize', $v->createValidator()->memberOf($iconsizes));
 
-$v->declareParameter('SmtpAuth', Validate::SERVICESTATUS);
-$v->declareParameter('SmtpStarttls', Validate::SERVICESTATUS);
-
 $v->declareParameter('MinMemory', Validate::POSITIVE_INTEGER);
 $v->declareParameter('MaxMemory', Validate::POSITIVE_INTEGER);
 
