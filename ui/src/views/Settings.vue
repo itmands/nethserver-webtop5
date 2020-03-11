@@ -93,48 +93,6 @@
               >{{$t('settings.advanced_mode')}}</a>
             </legend>
             <div v-if="advanced">
-              <div :class="['form-group margintop', errors.SmtpAuth.hasError ? 'has-error' : '']">
-                <label class="col-sm-2 control-label">
-                  {{$t('settings.smtp_auth')}}
-                  <doc-info
-                    :placement="'top'"
-                    :title="$t('settings.smtp_auth')"
-                    :chapter="'SmtpAuth'"
-                    :inline="true"
-                  ></doc-info>
-                </label>
-                <div class="col-sm-5">
-                  <input
-                    v-model="configuration.SmtpAuth"
-                    type="checkbox"
-                    class="form-control"
-                    true-value="enabled"
-                    false-value="disabled"
-                  >
-                  <span v-if="errors.SmtpAuth.hasError" class="help-block">{{$t('settings.not_valid_smtp_auth')}}</span>
-                </div>
-              </div>
-              <div :class="['form-group', errors.SmtpStarttls.hasError ? 'has-error' : '']">
-                <label class="col-sm-2 control-label">
-                  {{$t('settings.smtp_starttls')}}
-                  <doc-info
-                    :placement="'top'"
-                    :title="$t('settings.smtp_starttls')"
-                    :chapter="'SmtpStarttls'"
-                    :inline="true"
-                  ></doc-info>
-                </label>
-                <div class="col-sm-5">
-                  <input
-                    v-model="configuration.SmtpStarttls"
-                    type="checkbox"
-                    class="form-control"
-                    true-value="enabled"
-                    false-value="disabled"
-                  >
-                  <span v-if="errors.SmtpStarttls.hasError" class="help-block">{{$t('settings.not_valid_smtp_starttls')}}</span>
-                </div>
-              </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">
                   {{$t('settings.pbx_provider')}}
@@ -288,8 +246,6 @@ export default {
         DefaultLocale: 'en_US',
         DefaultTimezone: 'Etc/UTC',
         DefaultToolbarIconsSize: 'medium',
-        SmtpAuth: 'disabled',
-        SmtpStarttls: 'disabled',
         PublicUrl: null,
         DavServerUrl: null,
         LocaleList: null,
@@ -341,8 +297,6 @@ export default {
           DefaultLocale: context.configuration.DefaultLocale,
           DefaultTimezone: context.configuration.DefaultTimezone,
           DefaultToolbarIconsSize: context.configuration.DefaultToolbarIconsSize,
-          SmtpAuth: context.configuration.SmtpAuth,
-          SmtpStarttls: context.configuration.SmtpStarttls,
           PublicUrl: context.configuration.PublicUrl,
           DavServerUrl: context.configuration.DavServerUrl,
           PbxProvider: context.configuration.PbxProvider,
@@ -413,14 +367,6 @@ export default {
           message: ""
         },
         DefaultToolbarIconsSize: {
-          hasError: false,
-          message: ""
-        },
-        SmtpAuth: {
-          hasError: false,
-          message: ""
-        },
-        SmtpStarttls: {
           hasError: false,
           message: ""
         },
