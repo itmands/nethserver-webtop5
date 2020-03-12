@@ -208,7 +208,7 @@ print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\"
 
 # Set default field to use for ordering contacts to lastname
 print $fh "INSERT INTO \"core\".\"settings\" (service_id, key, value) SELECT 'com.sonicle.webtop.contacts', 'default.showby', 'lnfn'
-              WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE key = 'com.sonicle.webtop.contacts' and service_id = 'default.showby');\n";
+              WHERE NOT EXISTS (SELECT value from \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.contacts' and key = 'default.showby');\n";
 
 # Migrate old SMTP defaults
 my $sonicle_password = NethServer::Password::store('webtop5');
