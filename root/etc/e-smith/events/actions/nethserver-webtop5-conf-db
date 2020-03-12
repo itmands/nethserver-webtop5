@@ -216,7 +216,7 @@ my $out = `PGPASSWORD=$sonicle_password psql -U sonicle -c "COPY(select value fr
 chomp $out;
 my ($smtp_host,$smtp_port) = split(/\n/,$out);
 if ($smtp_host eq 'localhost' && $smtp_port eq '587') {
-    print $fh "UPDATE \"core\".\"settings\" SET value = '10587' WHERE key = 'smtp.port' AND service_id = 'com.sonicle.webtop.core' AND value = '587'";
+    print $fh "UPDATE \"core\".\"settings\" SET value = '10587' WHERE key = 'smtp.port' AND service_id = 'com.sonicle.webtop.core' AND value = '587';\n";
     print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'smtp.auth';\n";
     print $fh "INSERT INTO \"core\".\"settings\" (\"service_id\", \"key\", \"value\") VALUES ('com.sonicle.webtop.core', 'smtp.auth', 'true');\n";
     print $fh "DELETE FROM \"core\".\"settings\" WHERE service_id = 'com.sonicle.webtop.core' and key = 'smtp.port';\n";
