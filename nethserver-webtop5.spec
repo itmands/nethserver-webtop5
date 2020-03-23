@@ -1,6 +1,6 @@
 Summary: NethServer webtop5 configuration
 Name: nethserver-webtop5
-Version: 1.5.2
+Version: 1.6.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -101,6 +101,10 @@ cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 %doc README.rst
 
 %changelog
+* Mon Mar 23 2020 Matteo Valentini <matteo.valentini@nethesis.it> - 1.6.0-1
+  Delegate SMTP configuration to WebTop UI - NethServer/dev#6080
+  WebTop 5.8.3 - NethServer/dev#6079
+
 * Wed Mar 04 2020 Matteo Valentini <matteo.valentini@nethesis.it> - 1.5.2-1
 - WebTop 5.8.1 - NethServer/dev#6060
   - Move log config inside webtop.properties
